@@ -1,0 +1,46 @@
+﻿﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .main {
+        background-image: url("D:\WorkSpace\c_sharp\PhoneShopManagement\PhoneShop.AdminApp\wwwroot\img\HinhNen.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
+<div class="text-center">
+    <h1 class="display-4 font-weight-bold text-dark">Welcome to</h1>
+    <h1 class="display-7 font-weight-bold text-dark">Hệ Thống Quản Lý Chương Trình Đào Tạo</h1>
+</div>
+<main class="container py-5 main">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Khoa</h2>
+                    <p class="card-text">Quản lý Khoa</p>
+                    <a asp-action="Index" asp-controller="Khoa" class="btn btn-primary">Xem Các Khoa</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Ngành</h2>
+                    <p class="card-text">Quản lý Ngành</p>
+                    <a asp-action="Index" asp-controller="Nganh" class="btn btn-primary">Xem Các Ngành</a>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title font-weight-bold">Khóa Học</h2>
+                    <p class="card-text">Quản lý Khóa Học</p>
+                    <a asp-action="Index" asp-controller="KhoaHoc" class="btn btn-primary">Xem Các Khóa Học</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
