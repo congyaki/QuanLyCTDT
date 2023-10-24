@@ -42,7 +42,7 @@ namespace QuanLyCTDT.Migrations
 
                     b.HasKey("KhoaID");
 
-                    b.ToTable("Khoas");
+                    b.ToTable("Khoas", (string)null);
 
                     b.HasData(
                         new
@@ -96,7 +96,7 @@ namespace QuanLyCTDT.Migrations
 
                     b.HasIndex("NganhID");
 
-                    b.ToTable("KhoaHocs");
+                    b.ToTable("KhoaHocs", (string)null);
 
                     b.HasData(
                         new
@@ -162,7 +162,7 @@ namespace QuanLyCTDT.Migrations
 
                     b.HasIndex("KhoaID");
 
-                    b.ToTable("Nganhs");
+                    b.ToTable("Nganhs", (string)null);
 
                     b.HasData(
                         new

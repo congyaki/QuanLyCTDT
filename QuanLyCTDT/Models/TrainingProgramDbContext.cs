@@ -23,6 +23,7 @@ namespace QuanLyCTDT.Models
             modelBuilder.Entity<Khoa>(entity =>
             {
                 entity.HasKey(k => k.KhoaID);
+                entity.Property(k => k.KhoaID).UseIdentityColumn();
                 entity.Property(k => k.TenKhoa).IsRequired().HasMaxLength(100);
                 entity.Property(k => k.MoTa).HasMaxLength(200);
             });
@@ -30,6 +31,7 @@ namespace QuanLyCTDT.Models
             modelBuilder.Entity<Nganh>(entity =>
             {
                 entity.HasKey(n => n.NganhID);
+                entity.Property(k => k.NganhID).UseIdentityColumn();
                 entity.Property(n => n.TenNganh).IsRequired().HasMaxLength(100);
                 entity.Property(n => n.MoTa).HasMaxLength(200);
 
@@ -42,6 +44,7 @@ namespace QuanLyCTDT.Models
             modelBuilder.Entity<KhoaHoc>(entity =>
             {
                 entity.HasKey(kh => kh.KhoaHocID);
+                entity.Property(k => k.KhoaHocID).UseIdentityColumn();
                 entity.Property(kh => kh.TenKhoaHoc).IsRequired().HasMaxLength(100);
                 entity.Property(kh => kh.MoTa).HasMaxLength(200);
                 entity.Property(kh => kh.NgayBatDau).IsRequired();
