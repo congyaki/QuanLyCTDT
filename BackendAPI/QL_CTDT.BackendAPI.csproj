@@ -23,4 +23,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QL_CTDT.Data\QL_CTDT.Data.csproj" />
+  </ItemGroup>
+
 </Project>

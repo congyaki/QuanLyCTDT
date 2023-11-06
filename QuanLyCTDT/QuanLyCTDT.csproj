@@ -68,4 +68,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BackendAPI\QL_CTDT.BackendAPI.csproj" />
+  </ItemGroup>
+
 </Project>
