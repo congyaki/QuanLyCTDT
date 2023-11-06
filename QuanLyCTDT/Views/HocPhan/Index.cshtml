@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QuanLyCTDT.Models.HocPhan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Các Học Phần</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten_HocPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa_HocPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoTinChi_HocPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Khoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KhoiKienThuc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten_HocPhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa_HocPhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTinChi_HocPhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Khoa.TenKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoiKienThuc.Id_KhoiKT)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Ma_HocPhan">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Ma_HocPhan">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Ma_HocPhan">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

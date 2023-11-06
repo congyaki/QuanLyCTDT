@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QuanLyCTDT.Models.DanhMucCTDT>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Các Danh Mục CTĐT</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nganh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KhoaHoc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nganh.TenNganh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoaHoc.TenKhoaHoc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

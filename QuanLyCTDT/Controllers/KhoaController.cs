@@ -1,162 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using QuanLyCTDT.Models;
 
 namespace QuanLyCTDT.Controllers
 {
     public class KhoaController : Controller
     {
-        private readonly TrainingProgramDbContext _context;
-
-        public KhoaController(TrainingProgramDbContext context)
-        {
-            _context = context;
-        }
-
-        // GET: Khoa
-        public async Task<IActionResult> Index()
-        {
-              return _context.Khoas != null ? 
-                          View(await _context.Khoas.ToListAsync()) :
-                          Problem("Entity set 'TrainingProgramDbContext.Khoas'  is null.");
-        }
-
-        // GET: Khoa/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Khoas == null)
-            {
-                return NotFound();
-            }
-
-            var khoa = await _context.Khoas
-                .FirstOrDefaultAsync(m => m.KhoaID == id);
-            if (khoa == null)
-            {
-                return NotFound();
-            }
-
-            return View(khoa);
-        }
-
-        // GET: Khoa/Create
-        public IActionResult Create()
+        // GET: KhoaController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // POST: Khoa/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: KhoaController/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: KhoaController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: KhoaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("KhoaID,TenKhoa,MoTa")] Khoa khoa)
+        public ActionResult Create(IFormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(khoa);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(khoa);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Khoa/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: KhoaController/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (id == null || _context.Khoas == null)
-            {
-                return NotFound();
-            }
-
-            var khoa = await _context.Khoas.FindAsync(id);
-            if (khoa == null)
-            {
-                return NotFound();
-            }
-            return View(khoa);
+            return View();
         }
 
-        // POST: Khoa/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: KhoaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("KhoaID,TenKhoa,MoTa")] Khoa khoa)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            if (id != khoa.KhoaID)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(khoa);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!KhoaExists(khoa.KhoaID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(khoa);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Khoa/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: KhoaController/Delete/5
+        public ActionResult Delete(int id)
         {
-            if (id == null || _context.Khoas == null)
-            {
-                return NotFound();
-            }
-
-            var khoa = await _context.Khoas
-                .FirstOrDefaultAsync(m => m.KhoaID == id);
-            if (khoa == null)
-            {
-                return NotFound();
-            }
-
-            return View(khoa);
+            return View();
         }
 
-        // POST: Khoa/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: KhoaController/Delete/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
-            if (_context.Khoas == null)
+            try
             {
-                return Problem("Entity set 'TrainingProgramDbContext.Khoas'  is null.");
+                return RedirectToAction(nameof(Index));
             }
-            var khoa = await _context.Khoas.FindAsync(id);
-            if (khoa != null)
+            catch
             {
-                _context.Khoas.Remove(khoa);
+                return View();
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool KhoaExists(int id)
-        {
-          return (_context.Khoas?.Any(e => e.KhoaID == id)).GetValueOrDefault();
         }
     }
 }
