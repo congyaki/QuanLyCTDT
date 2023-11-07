@@ -1,0 +1,14 @@
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\bin\Debug\net6.0\QL_CTDT.Data.deps.json
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\bin\Debug\net6.0\QL_CTDT.Data.runtimeconfig.json
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\bin\Debug\net6.0\QL_CTDT.Data.dll
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\bin\Debug\net6.0\QL_CTDT.Data.pdb
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.csproj.AssemblyReference.cache
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.AssemblyInfoInputs.cache
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.AssemblyInfo.cs
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.csproj.CoreCompileInputs.cache
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.dll
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\refint\QL_CTDT.Data.dll
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.pdb
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\QL_CTDT.Data.genruntimeconfig.cache
+D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.Data\obj\Debug\net6.0\ref\QL_CTDT.Data.dll
