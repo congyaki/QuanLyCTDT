@@ -1,10 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using QL_CTDT.Data.Models.EF;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TrainingProgramDB");
 /*builder.Services.AddDbContext<TrainingProgramDbContext>(options => options.UseSqlServer(connectionString));*/
+builder.Services.AddDbContext<TrainingProgramDbContext>(option => 
+{
+    option.UseSqlServer(connectionString);
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

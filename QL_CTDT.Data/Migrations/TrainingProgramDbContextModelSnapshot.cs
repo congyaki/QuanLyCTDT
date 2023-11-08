@@ -41,7 +41,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasIndex("MaHocPhan");
 
-                    b.ToTable("ChiTietCTDTs");
+                    b.ToTable("ChiTietCTDTs", (string)null);
 
                     b.HasData(
                         new
@@ -77,7 +77,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasIndex("MaKhoaHoc");
 
-                    b.ToTable("DanhMucCTDTs");
+                    b.ToTable("DanhMucCTDTs", (string)null);
 
                     b.HasData(
                         new
@@ -113,7 +113,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasIndex("MaKKT");
 
-                    b.ToTable("DanhMucCTDT_KKTs");
+                    b.ToTable("DanhMucCTDT_KKTs", (string)null);
 
                     b.HasData(
                         new
@@ -159,7 +159,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasIndex("MaKhoa");
 
-                    b.ToTable("HocPhans");
+                    b.ToTable("HocPhans", (string)null);
 
                     b.HasData(
                         new
@@ -197,7 +197,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasKey("MaKhoa");
 
-                    b.ToTable("Khoas");
+                    b.ToTable("Khoas", (string)null);
 
                     b.HasData(
                         new
@@ -237,7 +237,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasKey("MaKhoaHoc");
 
-                    b.ToTable("KhoaHocs");
+                    b.ToTable("KhoaHocs", (string)null);
 
                     b.HasData(
                         new
@@ -273,7 +273,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasKey("MaKKT");
 
-                    b.ToTable("KhoiKienThucs");
+                    b.ToTable("KhoiKienThucs", (string)null);
 
                     b.HasData(
                         new
@@ -313,7 +313,7 @@ namespace QL_CTDT.Data.Migrations
 
                     b.HasIndex("MaKhoa");
 
-                    b.ToTable("Nganhs");
+                    b.ToTable("Nganhs", (string)null);
 
                     b.HasData(
                         new

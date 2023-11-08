@@ -12,16 +12,16 @@ namespace QL_CTDT.BackendAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class KhoaHocController : ControllerBase
+    public class KhoaHocsController : ControllerBase
     {
         private readonly TrainingProgramDbContext _context;
 
-        public KhoaHocController(TrainingProgramDbContext context)
+        public KhoaHocsController(TrainingProgramDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/KhoaHoc
+        // GET: api/KhoaHocs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<KhoaHoc>>> GetKhoaHocs()
         {
@@ -29,11 +29,10 @@ namespace QL_CTDT.BackendAPI.Controllers
           {
               return NotFound();
           }
-            var khoaHoc = await _context.KhoaHocs.ToListAsync();
-            return Ok(khoaHoc);
+            return await _context.KhoaHocs.ToListAsync();
         }
 
-        // GET: api/KhoaHoc/5
+        // GET: api/KhoaHocs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<KhoaHoc>> GetKhoaHoc(string id)
         {
@@ -51,7 +50,7 @@ namespace QL_CTDT.BackendAPI.Controllers
             return khoaHoc;
         }
 
-        // PUT: api/KhoaHoc/5
+        // PUT: api/KhoaHocs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutKhoaHoc(string id, KhoaHoc khoaHoc)
@@ -82,7 +81,7 @@ namespace QL_CTDT.BackendAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/KhoaHoc
+        // POST: api/KhoaHocs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<KhoaHoc>> PostKhoaHoc(KhoaHoc khoaHoc)
@@ -111,7 +110,7 @@ namespace QL_CTDT.BackendAPI.Controllers
             return CreatedAtAction("GetKhoaHoc", new { id = khoaHoc.MaKhoaHoc }, khoaHoc);
         }
 
-        // DELETE: api/KhoaHoc/5
+        // DELETE: api/KhoaHocs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteKhoaHoc(string id)
         {

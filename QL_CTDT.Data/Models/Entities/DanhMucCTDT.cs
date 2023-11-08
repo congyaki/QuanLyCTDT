@@ -1,4 +1,5 @@
 ﻿using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.Data.Models.Entities
 {
@@ -10,7 +11,7 @@ namespace QL_CTDT.Data.Models.Entities
 
         public Khoa Khoa { get; set; }
         public KhoaHoc KhoaHoc { get; set; }
-        public List<DanhMucCTDT_KKT>? DanhMucCTDT_KKTs { get; set; }
+        public List<DanhMucCTDT_KKT> DanhMucCTDT_KKTs { get; set; }
 
     }
 }

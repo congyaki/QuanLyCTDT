@@ -247,3 +247,4 @@ D:\WorkSpace\c_sharp\QuanLyCTDT\QuanLyCTDT\bin\Debug\net6.0\runtimes\unix\lib\ne
 D:\WorkSpace\c_sharp\QuanLyCTDT\QuanLyCTDT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\WorkSpace\c_sharp\QuanLyCTDT\QuanLyCTDT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\WorkSpace\c_sharp\QuanLyCTDT\QuanLyCTDT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\WorkSpace\c_sharp\QuanLyCTDT\QuanLyCTDT\obj\Debug\net6.0\QuanLyCTDT.MvcApplicationPartsAssemblyInfo.cs

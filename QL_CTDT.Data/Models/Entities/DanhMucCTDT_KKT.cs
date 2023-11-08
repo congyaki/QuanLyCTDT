@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QL_CTDT.Data.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,8 @@ namespace QL_CTDT.Data.Models.Entities
         public string MaDanhMucCTDT_KKT { get; set; }
         public string MaDanhMucCTDT { get; set; }
         public string MaKKT { get; set; }
-        public DanhMucCTDT? DanhMucCTDT { get; set; }
-        public KhoiKienThuc? KhoiKienThuc { get; set; }
-        public List<ChiTietCTDT>? ChiTietCTDTs { get; set; }
+        public DanhMucCTDT DanhMucCTDT { get; set; }
+        public KhoiKienThuc KhoiKienThuc { get; set; }
+        public List<ChiTietCTDT> ChiTietCTDTs { get; set; }
     }
 }
