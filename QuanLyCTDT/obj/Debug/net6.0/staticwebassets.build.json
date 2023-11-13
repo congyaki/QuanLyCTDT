@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "WxtCIUDP81fwGVZa2LWdF+sgE7H5uk0E2CiVcFC65iE=",
+  "Hash": "fRf4HjeKrZM80P1REonhHE1R3yE5lpdFdxjww/gMbo4=",
   "Source": "QuanLyCTDT",
   "BasePath": "_content/QuanLyCTDT",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\BackendAPI\\QL_CTDT.BackendAPI.csproj",
+      "Version": 2,
+      "Source": "QL_CTDT.BackendAPI",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "QuanLyCTDT\\wwwroot",

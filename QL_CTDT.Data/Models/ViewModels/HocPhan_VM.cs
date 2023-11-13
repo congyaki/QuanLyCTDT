@@ -8,7 +8,7 @@ namespace QL_CTDT.Data.Models.ViewModels
 {
     public class HocPhan_VM
     {
-        public string MaHocPhan { get; set; }
+        public string? MaHocPhan { get; set; }
 
         public string Ten { get; set; }
 

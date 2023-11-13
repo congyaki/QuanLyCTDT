@@ -6,18 +6,17 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "QuanLyCTDT/1.0.0": {
+      "QL_CTDT.BackendAPI/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "6.0.24",
           "Microsoft.EntityFrameworkCore.Design": "6.0.24",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.24",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.24",
-          "Microsoft.VisualStudio.Web.CodeGeneration": "6.0.16",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
-          "QL_CTDT.BackendAPI": "1.0.0"
+          "QL_CTDT.Data": "1.0.0",
+          "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
-          "QuanLyCTDT.dll": {}
+          "QL_CTDT.BackendAPI.dll": {}
         }
       },
       "Humanizer/2.14.1": {
@@ -2521,17 +2520,6 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "QL_CTDT.BackendAPI/1.0.0": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.24",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
-          "QL_CTDT.Data": "1.0.0",
-          "Swashbuckle.AspNetCore": "6.2.3"
-        },
-        "runtime": {
-          "QL_CTDT.BackendAPI.dll": {}
-        }
-      },
       "QL_CTDT.Data/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.24"
@@ -2543,7 +2531,7 @@
     }
   },
   "libraries": {
-    "QuanLyCTDT/1.0.0": {
+    "QL_CTDT.BackendAPI/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -4094,11 +4082,6 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
-    },
-    "QL_CTDT.BackendAPI/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "QL_CTDT.Data/1.0.0": {
       "type": "project",

@@ -8,7 +8,7 @@ namespace QL_CTDT.Data.Models.ViewModels
 {
     public class DanhMucCTDT_KKT_VM
     {
-        public string MaDanhMucCTDT_KKT { get; set; }
+        public string? MaDanhMucCTDT_KKT { get; set; }
         public string MaDanhMucCTDT { get; set; }
         public string MaKKT { get; set; }
     }

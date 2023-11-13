@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class KhoaHocsController : ControllerBase
+    public class KhoaHocController : ControllerBase
     {
         private readonly TrainingProgramDbContext _context;
 
-        public KhoaHocsController(TrainingProgramDbContext context)
+        public KhoaHocController(TrainingProgramDbContext context)
         {
             _context = context;
         }
@@ -53,14 +54,19 @@ namespace QL_CTDT.BackendAPI.Controllers
         // PUT: api/KhoaHocs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutKhoaHoc(string id, KhoaHoc khoaHoc)
+        public async Task<IActionResult> PutKhoaHoc(string id, KhoaHoc_VM khoaHoc)
         {
-            if (id != khoaHoc.MaKhoaHoc)
+            var _khoaHoc = _context.KhoaHocs.SingleOrDefault(p => p.MaKhoaHoc == id);
+            if (id != _khoaHoc.MaKhoaHoc)
             {
                 return BadRequest();
             }
+            _khoaHoc.Ten = khoaHoc.Ten;
+            _khoaHoc.MoTa = khoaHoc.MoTa;
+            _khoaHoc.NgayBatDau = khoaHoc.NgayBatDau;
+            _khoaHoc.NgayKetThuc = khoaHoc.NgayKetThuc;
 
-            _context.Entry(khoaHoc).State = EntityState.Modified;
+            _context.Entry(_khoaHoc).State = EntityState.Modified;
 
             try
             {
@@ -84,13 +90,21 @@ namespace QL_CTDT.BackendAPI.Controllers
         // POST: api/KhoaHocs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<KhoaHoc>> PostKhoaHoc(KhoaHoc khoaHoc)
+        public async Task<ActionResult<KhoaHoc>> PostKhoaHoc(KhoaHoc_VM khoaHoc)
         {
           if (_context.KhoaHocs == null)
           {
               return Problem("Entity set 'TrainingProgramDbContext.KhoaHocs'  is null.");
           }
-            _context.KhoaHocs.Add(khoaHoc);
+            var _khoaHoc = new KhoaHoc
+            {
+                MaKhoaHoc = khoaHoc.MaKhoaHoc,
+                Ten = khoaHoc.Ten,
+                MoTa = khoaHoc.MoTa,
+                NgayBatDau = khoaHoc.NgayBatDau,
+                NgayKetThuc = khoaHoc.NgayKetThuc,
+            };
+            _context.KhoaHocs.Add(_khoaHoc);
             try
             {
                 await _context.SaveChangesAsync();
@@ -107,7 +121,7 @@ namespace QL_CTDT.BackendAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetKhoaHoc", new { id = khoaHoc.MaKhoaHoc }, khoaHoc);
+            return CreatedAtAction("GetKhoaHoc", new { id = _khoaHoc.MaKhoaHoc }, _khoaHoc);
         }
 
         // DELETE: api/KhoaHocs/5

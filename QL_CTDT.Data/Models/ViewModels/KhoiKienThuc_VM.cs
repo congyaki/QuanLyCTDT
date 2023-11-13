@@ -8,7 +8,7 @@ namespace QL_CTDT.Data.Models.ViewModels
 {
     public class KhoiKienThuc_VM
     {
-        public string MaKKT { get; set; }
+        public string? MaKKT { get; set; }
         public string Ten { get; set; }
         public string MoTa { get; set; }
     }
