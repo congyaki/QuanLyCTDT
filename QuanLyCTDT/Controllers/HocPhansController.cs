@@ -5,12 +5,12 @@ using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
 {
-    public class KhoaHocsController : Controller
+    public class HocPhansController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7262/api");
         private readonly HttpClient _httpClient;
 
-        public KhoaHocsController()
+        public HocPhansController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
@@ -19,37 +19,37 @@ namespace QuanLyCTDT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<KhoaHoc> khoaHocs = new List<KhoaHoc>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoaHoc/GetKhoaHocs").Result;
+            List<HocPhan> hocPhans = new List<HocPhan>();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/HocPhan/GetHocPhans").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                khoaHocs = JsonConvert.DeserializeObject<List<KhoaHoc>>(data);
+                hocPhans = JsonConvert.DeserializeObject<List<HocPhan>>(data);
             }
-            return View(khoaHocs);
+            return View(hocPhans);
         }
 
-        // GET: KhoaHocsController/Details/5
+        // GET: HocPhansController/Details/5
         [HttpGet("{id}")]
         public IActionResult Details()
         {
-            KhoaHoc khoaHoc = new KhoaHoc();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoaHoc/GetKhoaHoc").Result;
+            HocPhan hocPhan = new HocPhan();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/HocPhan/GetHocPhan").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                khoaHoc = JsonConvert.DeserializeObject<KhoaHoc>(data);
+                hocPhan = JsonConvert.DeserializeObject<HocPhan>(data);
             }
-            return View(khoaHoc);
+            return View(hocPhan);
         }
 
-        // GET: KhoaHocsController/Create
+        // GET: HocPhansController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: KhoaHocsController/Create
+        // POST: HocPhansController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -64,13 +64,13 @@ namespace QuanLyCTDT.Controllers
             }
         }
 
-        // GET: KhoaHocsController/Edit/5
+        // GET: HocPhansController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: KhoaHocsController/Edit/5
+        // POST: HocPhansController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -85,13 +85,13 @@ namespace QuanLyCTDT.Controllers
             }
         }
 
-        // GET: KhoaHocsController/Delete/5
+        // GET: HocPhansController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: KhoaHocsController/Delete/5
+        // POST: HocPhansController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
