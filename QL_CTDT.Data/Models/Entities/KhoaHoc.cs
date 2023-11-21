@@ -9,7 +9,7 @@ namespace QL_CTDT.Data.Models.Entities
         public string MoTa { get; set; }
         public DateTime NgayBatDau { get; set; }
         public DateTime NgayKetThuc { get; set; }
-        public List<DanhMucCTDT> DanhMucCTDTs { get; set; }
+        public List<ChuongTrinhDaoTao> ChuongTrinhDaoTaos { get; set; }
 
     }
 }

@@ -15,6 +15,6 @@ namespace QL_CTDT.Data.Models.Entities
         public string MaKhoa { get; set; }
         public Khoa Khoa { get; set; }
 
-        public List<ChiTietCTDT> ChiTietCTDTs { get; set; }
+        public List<GanHocPhan> GanHocPhans { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace QL_CTDT.BackendAPI.Controllers
           {
               return NotFound();
           }
-            var khoaHoc = await _context.KhoaHocs.FirstOrDefaultAsync(p => p.MaKhoaHoc == id);
+            var khoaHoc = await _context.KhoaHocs.SingleOrDefaultAsync(p => p.MaKhoaHoc == id);
 
             if (khoaHoc == null)
             {

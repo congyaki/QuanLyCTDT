@@ -41,14 +41,26 @@ namespace QL_CTDT.BackendAPI.Controllers
           {
               return NotFound();
           }
-            var khoa = await _context.Khoas.FindAsync(id);
+            var hocPhans = await (from hp in _context.HocPhans
+                          where hp.MaKhoa == id
+                          select hp).ToListAsync();
+
+            var khoa = await (from k in _context.Khoas
+                       where k.MaKhoa == id
+                       select new Khoa()
+                       {
+                            MaKhoa = k.MaKhoa,
+                            Ten = k.Ten,
+                            MoTa = k.MoTa,
+                            HocPhans = hocPhans
+                       }).ToListAsync();
 
             if (khoa == null)
             {
                 return NotFound();
             }
 
-            return khoa;
+            return Ok(khoa);
         }
 
         // PUT: api/Khoa/5

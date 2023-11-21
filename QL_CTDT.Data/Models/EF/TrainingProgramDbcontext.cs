@@ -15,9 +15,9 @@ namespace QL_CTDT.Data.Models.EF
         public DbSet<KhoaHoc> KhoaHocs { get; set; }
         public DbSet<KhoiKienThuc> KhoiKienThucs { get; set; }
         public DbSet<HocPhan> HocPhans { get; set; }
-        public DbSet<DanhMucCTDT> DanhMucCTDTs { get; set; }
-        public DbSet<DanhMucCTDT_KKT> DanhMucCTDT_KKTs { get; set; }
-        public DbSet<ChiTietCTDT> ChiTietCTDTs { get; set; }
+        public DbSet<GanHocPhan> GanHocPhans { get; set; }
+        public DbSet<ChuongTrinhDaoTao> ChuongTrinhDaoTaos { get; set; }
+        public DbSet<CTDT_KKT> CTDT_KKTs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Cấu hình chuỗi kết nối đến cơ sở dữ liệu
@@ -73,19 +73,6 @@ namespace QL_CTDT.Data.Models.EF
                 entity.Property(k => k.MoTa);
             });
 
-            modelBuilder.Entity<DanhMucCTDT>(entity =>
-            {
-                entity.HasKey(d => d.MaDanhMucCTDT);
-
-                entity.HasOne(d => d.Khoa)
-                    .WithMany(n => n.DanhMucCTDTs)
-                    .HasForeignKey(d => d.MaKhoa).OnDelete(DeleteBehavior.NoAction); ;
-
-                entity.HasOne(d => d.KhoaHoc)
-                    .WithMany(kh => kh.DanhMucCTDTs)
-                    .HasForeignKey(d => d.MaKhoaHoc).OnDelete(DeleteBehavior.NoAction);
-            });
-
             modelBuilder.Entity<HocPhan>(entity =>
             {
                 entity.HasKey(h => h.MaHocPhan);
@@ -99,32 +86,42 @@ namespace QL_CTDT.Data.Models.EF
                     .WithMany(k => k.HocPhans)
                     .HasForeignKey(h => h.MaKhoa);
             });
-            modelBuilder.Entity<DanhMucCTDT_KKT>(entity =>
+            modelBuilder.Entity<CTDT_KKT>(entity =>
             {
-                entity.HasKey(h => h.MaDanhMucCTDT_KKT);
-                entity.Property(h => h.MaKKT).IsRequired();
-                entity.Property(h => h.MaDanhMucCTDT).IsRequired();
-
-                entity.HasOne(d => d.DanhMucCTDT)
-                    .WithMany(kh => kh.DanhMucCTDT_KKTs)
-                    .HasForeignKey(d => d.MaDanhMucCTDT).OnDelete(DeleteBehavior.NoAction);
+                entity.HasKey(h => h.MaCTDT_KKT);
+                entity.HasOne(d => d.ChuongTrinhDaoTao)
+                        .WithMany(d => d.CTDT_KKTs)
+                        .HasForeignKey(h => h.MaCTDT);
                 entity.HasOne(d => d.KhoiKienThuc)
-                    .WithMany(kh => kh.DanhMucCTDT_KKTs)
-                    .HasForeignKey(d => d.MaKKT).OnDelete(DeleteBehavior.NoAction);
+                        .WithMany(d => d.CTDT_KKTs)
+                        .HasForeignKey(h => h.MaKKT);
+
+            });
+            modelBuilder.Entity<GanHocPhan>(entity =>
+            {
+                entity.HasKey(h => new {h.MaCTDT_KKT, h.MaHocPhan});
+
+                entity.HasOne(d => d.CTDT_KKT)
+                    .WithMany(kh => kh.GanHocPhans)
+                    .HasForeignKey(d => d.MaCTDT_KKT).OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(d => d.HocPhan)
+                    .WithMany(kh => kh.GanHocPhans)
+                    .HasForeignKey(d => d.MaHocPhan).OnDelete(DeleteBehavior.NoAction);
             });
 
-            modelBuilder.Entity<ChiTietCTDT>(entity =>
+            modelBuilder.Entity<ChuongTrinhDaoTao>(entity =>
             {
-                entity.HasKey(h => h.MaChiTietCTDT);
-                entity.Property(h => h.MaHocPhan).IsRequired();
-                entity.Property(h => h.MaDanhMucCTDT_KKT).IsRequired();
-                entity.HasOne(h => h.HocPhan)
-                    .WithMany(kh => kh.ChiTietCTDTs)
-                    .HasForeignKey(h => h.MaHocPhan).OnDelete(DeleteBehavior.NoAction);
-                entity.HasOne(h => h.DanhMucCTDT_KKT)
-                    .WithMany(kh => kh.ChiTietCTDTs)
-                    .HasForeignKey(h => h.MaDanhMucCTDT_KKT);
-
+                entity.HasKey(h => h.MaCTDT);
+                entity.HasOne(h => h.Khoa)
+                    .WithMany(kh => kh.ChuongTrinhDaoTaos)
+                    .HasForeignKey(h => h.MaKhoa).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(h => h.KhoaHoc)
+                    .WithMany(kh => kh.ChuongTrinhDaoTaos)
+                    .HasForeignKey(h => h.MaKhoaHoc);
+                entity.HasOne(h => h.Nganh)
+                    .WithMany(kh => kh.ChuongTrinhDaoTaos)
+                    .HasForeignKey(h => h.MaNganh);
             });
 
             // Tạo dữ liệu cho bảng Khoa
@@ -153,11 +150,6 @@ namespace QL_CTDT.Data.Models.EF
                 new HocPhan { MaHocPhan = "HP1", Ten = "Lập trình C++", MoTa = "Mô tả học phần Lập trình C++", SoTinChi = 3, MaKhoa = "K1" },
                 new HocPhan { MaHocPhan = "HP2", Ten = "Kế toán tài chính", MoTa = "Mô tả học phần Kế toán tài chính", SoTinChi = 3, MaKhoa = "K2" }
                 );
-            modelBuilder.Entity<DanhMucCTDT>().HasData(
-                new DanhMucCTDT { MaDanhMucCTDT = "CTDT1", MaKhoa = "K1", MaKhoaHoc = "KH1" },
-                new DanhMucCTDT { MaDanhMucCTDT = "CTDT2", MaKhoa = "K2", MaKhoaHoc = "KH2" }
-            // Thêm dữ liệu cho các danh mục CTĐT khác  
-                );
 
             modelBuilder.Entity<KhoiKienThuc>().HasData(
                 new KhoiKienThuc { MaKKT = "KKT1", Ten = "Khối kiến thức 1", MoTa = "Mô tả khối kiến thức 1" },
@@ -165,16 +157,22 @@ namespace QL_CTDT.Data.Models.EF
             // Thêm dữ liệu cho các khối kiến thức khác
             );
 
-            modelBuilder.Entity<DanhMucCTDT_KKT>().HasData(
-                new DanhMucCTDT_KKT { MaDanhMucCTDT_KKT = "CTDT_KKT_1", MaDanhMucCTDT = "CTDT1", MaKKT = "KKT1" },
-                new DanhMucCTDT_KKT { MaDanhMucCTDT_KKT = "CTDT_KKT_2", MaDanhMucCTDT = "CTDT1", MaKKT = "KKT2" }
+            
+
+            modelBuilder.Entity<ChuongTrinhDaoTao>().HasData(
+                new ChuongTrinhDaoTao { MaCTDT = "CTDT1", Ten = "CTDT1", MaKhoa = "K1", MaKhoaHoc = "KH1", MaNganh = "N1", SoNamDaoTao = 2 },
+                new ChuongTrinhDaoTao { MaCTDT = "CTDT2", Ten = "CTDT2", MaKhoa = "K1", MaKhoaHoc = "KH1", MaNganh = "N1", SoNamDaoTao = 2 }
+            // Thêm dữ liệu cho các chi tiết CTĐT khác
+            );
+            modelBuilder.Entity<CTDT_KKT>().HasData(
+                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT1", MaCTDT = "CTDT1", MaKKT = "KKT1" },
+                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT2", MaCTDT = "CTDT1", MaKKT = "KKT2" }
             // Thêm dữ liệu cho các mối quan hệ giữa danh mục CTĐT và khối kiến thức khác
             );
-
-            modelBuilder.Entity<ChiTietCTDT>().HasData(
-                new ChiTietCTDT { MaChiTietCTDT = "1", MaHocPhan = "HP1", MaDanhMucCTDT_KKT = "CTDT_KKT_1" },
-                new ChiTietCTDT { MaChiTietCTDT = "2", MaHocPhan = "HP2", MaDanhMucCTDT_KKT = "CTDT_KKT_2" }
-            // Thêm dữ liệu cho các chi tiết CTĐT khác
+            modelBuilder.Entity<GanHocPhan>().HasData(
+                new GanHocPhan { MaCTDT_KKT = "CTDT_KKT1", MaHocPhan = "HP1" },
+                new GanHocPhan { MaCTDT_KKT = "CTDT_KKT2", MaHocPhan = "HP2" }
+            // Thêm dữ liệu cho các mối quan hệ giữa danh mục CTĐT và khối kiến thức khác
             );
 
             base.OnModelCreating(modelBuilder);

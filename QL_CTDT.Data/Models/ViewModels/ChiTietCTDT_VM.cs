@@ -8,8 +8,9 @@ namespace QL_CTDT.Data.Models.ViewModels
 {
     public class ChiTietCTDT_VM
     {
-        public string? MaChiTietCTDT { get; set; }
-        public string MaHocPhan { get; set; }
-        public string MaDanhMucCTDT_KKT { get; set; }
+        public string TenKhoaHoc { get; set; }
+        public string TenNganh { get; set; }
+        public string TenCTDT { get; set; }
+        public List<CTDT_KKT_VM> CTDT_KKT_VM { get; set; }
     }
 }

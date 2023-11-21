@@ -19,12 +19,12 @@ namespace QuanLyCTDT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<DanhMucCTDT_KKT> danhMucCTDT_KKT = new List<DanhMucCTDT_KKT>();
+            List<GanHocPhan> danhMucCTDT_KKT = new List<GanHocPhan>();
             HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT_KKT/GetDanhMucCTDT_KKT").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT_KKT = JsonConvert.DeserializeObject<List<DanhMucCTDT_KKT>>(data);
+                danhMucCTDT_KKT = JsonConvert.DeserializeObject<List<GanHocPhan>>(data);
             }
             return View(danhMucCTDT_KKT);
         }
@@ -33,12 +33,12 @@ namespace QuanLyCTDT.Controllers
         [HttpGet("{id}")]
         public IActionResult Details()
         {
-            DanhMucCTDT_KKT danhMucCTDT_KKTs = new DanhMucCTDT_KKT();
+            GanHocPhan danhMucCTDT_KKTs = new GanHocPhan();
             HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT_KKT/GetDanhMucCTDT_KKTs").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT_KKTs = JsonConvert.DeserializeObject<DanhMucCTDT_KKT>(data);
+                danhMucCTDT_KKTs = JsonConvert.DeserializeObject<GanHocPhan>(data);
             }
             return View(danhMucCTDT_KKTs);
         }

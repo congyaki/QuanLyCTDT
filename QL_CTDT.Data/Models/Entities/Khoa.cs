@@ -9,8 +9,8 @@ namespace QL_CTDT.Data.Models.Entities
         public string MoTa { get; set; }
 
         public List<Nganh> Nganhs { get; set; }
-        public List<DanhMucCTDT> DanhMucCTDTs { get; set; }
-        public  List<HocPhan> HocPhans { get; set; }
+        public List<HocPhan> HocPhans { get; set; }
+        public  List<ChuongTrinhDaoTao> ChuongTrinhDaoTaos { get; set; }
 
     }
 }

@@ -12,8 +12,8 @@ using QL_CTDT.Data.Models.EF;
 namespace QL_CTDT.Data.Migrations
 {
     [DbContext(typeof(TrainingProgramDbContext))]
-    [Migration("20231106144802_Initial")]
-    partial class Initial
+    [Migration("20231120145110_InitialDb-3")]
+    partial class InitialDb3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,45 +24,9 @@ namespace QL_CTDT.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.ChiTietCTDT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao", b =>
                 {
-                    b.Property<string>("MaChiTietCTDT")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MaDanhMucCTDT_KKT")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MaHocPhan")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("MaChiTietCTDT");
-
-                    b.HasIndex("MaDanhMucCTDT_KKT");
-
-                    b.HasIndex("MaHocPhan");
-
-                    b.ToTable("ChiTietCTDTs");
-
-                    b.HasData(
-                        new
-                        {
-                            MaChiTietCTDT = "1",
-                            MaDanhMucCTDT_KKT = "CTDT_KKT_1",
-                            MaHocPhan = "HP1"
-                        },
-                        new
-                        {
-                            MaChiTietCTDT = "2",
-                            MaDanhMucCTDT_KKT = "CTDT_KKT_2",
-                            MaHocPhan = "HP2"
-                        });
-                });
-
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT", b =>
-                {
-                    b.Property<string>("MaDanhMucCTDT")
+                    b.Property<string>("MaCTDT")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MaKhoa")
@@ -73,35 +37,54 @@ namespace QL_CTDT.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("MaDanhMucCTDT");
+                    b.Property<string>("MaNganh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("SoNamDaoTao")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaCTDT");
 
                     b.HasIndex("MaKhoa");
 
                     b.HasIndex("MaKhoaHoc");
 
-                    b.ToTable("DanhMucCTDTs");
+                    b.HasIndex("MaNganh");
+
+                    b.ToTable("ChuongTrinhDaoTaos");
 
                     b.HasData(
                         new
                         {
-                            MaDanhMucCTDT = "CTDT1",
+                            MaCTDT = "CTDT1",
                             MaKhoa = "K1",
-                            MaKhoaHoc = "KH1"
+                            MaKhoaHoc = "KH1",
+                            MaNganh = "N1",
+                            SoNamDaoTao = 2f,
+                            Ten = "CTDT1"
                         },
                         new
                         {
-                            MaDanhMucCTDT = "CTDT2",
-                            MaKhoa = "K2",
-                            MaKhoaHoc = "KH2"
+                            MaCTDT = "CTDT2",
+                            MaKhoa = "K1",
+                            MaKhoaHoc = "KH1",
+                            MaNganh = "N1",
+                            SoNamDaoTao = 2f,
+                            Ten = "CTDT2"
                         });
                 });
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT_KKT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.CTDT_KKT", b =>
                 {
-                    b.Property<string>("MaDanhMucCTDT_KKT")
+                    b.Property<string>("MaCTDT_KKT")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("MaDanhMucCTDT")
+                    b.Property<string>("MaCTDT")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -109,35 +92,59 @@ namespace QL_CTDT.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("MaDanhMucCTDT_KKT");
+                    b.HasKey("MaCTDT_KKT");
 
-                    b.HasIndex("MaDanhMucCTDT");
+                    b.HasIndex("MaCTDT");
 
                     b.HasIndex("MaKKT");
 
-                    b.ToTable("DanhMucCTDT_KKTs");
+                    b.ToTable("CTDT_KKTs");
 
                     b.HasData(
                         new
                         {
-                            MaDanhMucCTDT_KKT = "CTDT_KKT_1",
-                            MaDanhMucCTDT = "CTDT1",
+                            MaCTDT_KKT = "CTDT_KKT1",
+                            MaCTDT = "CTDT1",
                             MaKKT = "KKT1"
                         },
                         new
                         {
-                            MaDanhMucCTDT_KKT = "CTDT_KKT_2",
-                            MaDanhMucCTDT = "CTDT1",
+                            MaCTDT_KKT = "CTDT_KKT2",
+                            MaCTDT = "CTDT1",
                             MaKKT = "KKT2"
+                        });
+                });
+
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.GanHocPhan", b =>
+                {
+                    b.Property<string>("MaCTDT_KKT")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MaHocPhan")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MaCTDT_KKT", "MaHocPhan");
+
+                    b.HasIndex("MaHocPhan");
+
+                    b.ToTable("GanHocPhans");
+
+                    b.HasData(
+                        new
+                        {
+                            MaCTDT_KKT = "CTDT_KKT1",
+                            MaHocPhan = "HP1"
+                        },
+                        new
+                        {
+                            MaCTDT_KKT = "CTDT_KKT2",
+                            MaHocPhan = "HP2"
                         });
                 });
 
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.HocPhan", b =>
                 {
                     b.Property<string>("MaHocPhan")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("KhoiKienThucMaKKT")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("MaKhoa")
@@ -156,8 +163,6 @@ namespace QL_CTDT.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaHocPhan");
-
-                    b.HasIndex("KhoiKienThucMaKKT");
 
                     b.HasIndex("MaKhoa");
 
@@ -246,16 +251,16 @@ namespace QL_CTDT.Data.Migrations
                         {
                             MaKhoaHoc = "KH1",
                             MoTa = "Mô tả khóa học Kỹ thuật phần mềm",
-                            NgayBatDau = new DateTime(2023, 11, 6, 21, 48, 1, 855, DateTimeKind.Local).AddTicks(9214),
-                            NgayKetThuc = new DateTime(2023, 12, 6, 21, 48, 1, 855, DateTimeKind.Local).AddTicks(9226),
+                            NgayBatDau = new DateTime(2023, 11, 20, 21, 51, 9, 898, DateTimeKind.Local).AddTicks(3490),
+                            NgayKetThuc = new DateTime(2023, 12, 20, 21, 51, 9, 898, DateTimeKind.Local).AddTicks(3504),
                             Ten = "Khóa học Kỹ thuật phần mềm"
                         },
                         new
                         {
                             MaKhoaHoc = "KH2",
                             MoTa = "Mô tả khóa học Quản trị kinh doanh",
-                            NgayBatDau = new DateTime(2023, 11, 6, 21, 48, 1, 855, DateTimeKind.Local).AddTicks(9235),
-                            NgayKetThuc = new DateTime(2023, 12, 6, 21, 48, 1, 855, DateTimeKind.Local).AddTicks(9235),
+                            NgayBatDau = new DateTime(2023, 11, 20, 21, 51, 9, 898, DateTimeKind.Local).AddTicks(3511),
+                            NgayKetThuc = new DateTime(2023, 12, 20, 21, 51, 9, 898, DateTimeKind.Local).AddTicks(3511),
                             Ten = "Khóa học Quản trị kinh doanh"
                         });
                 });
@@ -334,69 +339,73 @@ namespace QL_CTDT.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.ChiTietCTDT", b =>
-                {
-                    b.HasOne("QL_CTDT.Data.Models.Entities.DanhMucCTDT_KKT", "DanhMucCTDT_KKT")
-                        .WithMany("ChiTietCTDTs")
-                        .HasForeignKey("MaDanhMucCTDT_KKT")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QL_CTDT.Data.Models.Entities.HocPhan", "HocPhan")
-                        .WithMany("ChiTietCTDTs")
-                        .HasForeignKey("MaHocPhan")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("DanhMucCTDT_KKT");
-
-                    b.Navigation("HocPhan");
-                });
-
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao", b =>
                 {
                     b.HasOne("QL_CTDT.Data.Models.Entities.Khoa", "Khoa")
-                        .WithMany("DanhMucCTDTs")
+                        .WithMany("ChuongTrinhDaoTaos")
                         .HasForeignKey("MaKhoa")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("QL_CTDT.Data.Models.Entities.KhoaHoc", "KhoaHoc")
-                        .WithMany("DanhMucCTDTs")
+                        .WithMany("ChuongTrinhDaoTaos")
                         .HasForeignKey("MaKhoaHoc")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QL_CTDT.Data.Models.Entities.Nganh", "Nganh")
+                        .WithMany("ChuongTrinhDaoTaos")
+                        .HasForeignKey("MaNganh")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Khoa");
 
                     b.Navigation("KhoaHoc");
+
+                    b.Navigation("Nganh");
                 });
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT_KKT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.CTDT_KKT", b =>
                 {
-                    b.HasOne("QL_CTDT.Data.Models.Entities.DanhMucCTDT", "DanhMucCTDT")
-                        .WithMany("DanhMucCTDT_KKTs")
-                        .HasForeignKey("MaDanhMucCTDT")
-                        .OnDelete(DeleteBehavior.NoAction)
+                    b.HasOne("QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao", "ChuongTrinhDaoTao")
+                        .WithMany("CTDT_KKTs")
+                        .HasForeignKey("MaCTDT")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QL_CTDT.Data.Models.Entities.KhoiKienThuc", "KhoiKienThuc")
-                        .WithMany("DanhMucCTDT_KKTs")
+                        .WithMany("CTDT_KKTs")
                         .HasForeignKey("MaKKT")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DanhMucCTDT");
+                    b.Navigation("ChuongTrinhDaoTao");
 
                     b.Navigation("KhoiKienThuc");
                 });
 
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.GanHocPhan", b =>
+                {
+                    b.HasOne("QL_CTDT.Data.Models.Entities.CTDT_KKT", "CTDT_KKT")
+                        .WithMany("GanHocPhans")
+                        .HasForeignKey("MaCTDT_KKT")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("QL_CTDT.Data.Models.Entities.HocPhan", "HocPhan")
+                        .WithMany("GanHocPhans")
+                        .HasForeignKey("MaHocPhan")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CTDT_KKT");
+
+                    b.Navigation("HocPhan");
+                });
+
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.HocPhan", b =>
                 {
-                    b.HasOne("QL_CTDT.Data.Models.Entities.KhoiKienThuc", null)
-                        .WithMany("HocPhans")
-                        .HasForeignKey("KhoiKienThucMaKKT");
-
                     b.HasOne("QL_CTDT.Data.Models.Entities.Khoa", "Khoa")
                         .WithMany("HocPhans")
                         .HasForeignKey("MaKhoa")
@@ -417,24 +426,24 @@ namespace QL_CTDT.Data.Migrations
                     b.Navigation("Khoa");
                 });
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao", b =>
                 {
-                    b.Navigation("DanhMucCTDT_KKTs");
+                    b.Navigation("CTDT_KKTs");
                 });
 
-            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.DanhMucCTDT_KKT", b =>
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.CTDT_KKT", b =>
                 {
-                    b.Navigation("ChiTietCTDTs");
+                    b.Navigation("GanHocPhans");
                 });
 
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.HocPhan", b =>
                 {
-                    b.Navigation("ChiTietCTDTs");
+                    b.Navigation("GanHocPhans");
                 });
 
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.Khoa", b =>
                 {
-                    b.Navigation("DanhMucCTDTs");
+                    b.Navigation("ChuongTrinhDaoTaos");
 
                     b.Navigation("HocPhans");
 
@@ -443,14 +452,17 @@ namespace QL_CTDT.Data.Migrations
 
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.KhoaHoc", b =>
                 {
-                    b.Navigation("DanhMucCTDTs");
+                    b.Navigation("ChuongTrinhDaoTaos");
                 });
 
             modelBuilder.Entity("QL_CTDT.Data.Models.Entities.KhoiKienThuc", b =>
                 {
-                    b.Navigation("DanhMucCTDT_KKTs");
+                    b.Navigation("CTDT_KKTs");
+                });
 
-                    b.Navigation("HocPhans");
+            modelBuilder.Entity("QL_CTDT.Data.Models.Entities.Nganh", b =>
+                {
+                    b.Navigation("ChuongTrinhDaoTaos");
                 });
 #pragma warning restore 612, 618
         }

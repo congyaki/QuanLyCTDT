@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace QL_CTDT.Data.Models.Entities
 {
-    public class ChiTietCTDT
+    public class GanHocPhan
     {
-        public string MaChiTietCTDT { get; set; }
+        public string MaCTDT_KKT { get; set; }
         public string MaHocPhan { get; set; }
-        public string MaDanhMucCTDT_KKT { get; set; }
         public HocPhan HocPhan { get; set; }
-        public DanhMucCTDT_KKT DanhMucCTDT_KKT { get; set; }
+        public CTDT_KKT CTDT_KKT { get; set; }
     }
 }
