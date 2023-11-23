@@ -10,13 +10,13 @@ using QL_CTDT.Data.Models.Entities;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CTDT_KKTsController : ControllerBase
+    public class CTDT_KKTController : ControllerBase
     {
         private readonly TrainingProgramDbContext _context;
 
-        public CTDT_KKTsController(TrainingProgramDbContext context)
+        public CTDT_KKTController(TrainingProgramDbContext context)
         {
             _context = context;
         }

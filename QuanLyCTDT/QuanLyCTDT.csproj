@@ -69,7 +69,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BackendAPI\QL_CTDT.BackendAPI.csproj" />
+    <ProjectReference Include="..\QL_CTDT.Data\QL_CTDT.Data.csproj" />
   </ItemGroup>
 
 </Project>

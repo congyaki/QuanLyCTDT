@@ -5,12 +5,12 @@ using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
 {
-    public class DanhMucCTDT_KKTsController : Controller
+    public class ChuongTrinhDaoTaosController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7262/api");
         private readonly HttpClient _httpClient;
 
-        public DanhMucCTDT_KKTsController()
+        public ChuongTrinhDaoTaosController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
@@ -19,28 +19,28 @@ namespace QuanLyCTDT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<GanHocPhan> danhMucCTDT_KKT = new List<GanHocPhan>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT_KKT/GetDanhMucCTDT_KKT").Result;
+            List<ChuongTrinhDaoTao> ctdts = new List<ChuongTrinhDaoTao>();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/ChuongTrinhDaoTao/GetChuongTrinhDaoTaos").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT_KKT = JsonConvert.DeserializeObject<List<GanHocPhan>>(data);
+                ctdts = JsonConvert.DeserializeObject<List<ChuongTrinhDaoTao>>(data);
             }
-            return View(danhMucCTDT_KKT);
+            return View(ctdts);
         }
 
         // GET: DanhMucCTDT_KKTs/Details/5
         [HttpGet("{id}")]
         public IActionResult Details()
         {
-            GanHocPhan danhMucCTDT_KKTs = new GanHocPhan();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT_KKT/GetDanhMucCTDT_KKTs").Result;
+            ChuongTrinhDaoTao ctdt = new ChuongTrinhDaoTao();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/ChuongTrinhDaoTao/GetChuongTrinhDaoTao").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT_KKTs = JsonConvert.DeserializeObject<GanHocPhan>(data);
+                ctdt = JsonConvert.DeserializeObject<ChuongTrinhDaoTao>(data);
             }
-            return View(danhMucCTDT_KKTs);
+            return View(ctdt);
         }
 
         // GET: DanhMucCTDT_KKTs/Create

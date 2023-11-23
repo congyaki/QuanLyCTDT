@@ -10,13 +10,13 @@ using QL_CTDT.Data.Models.Entities;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class GanHocPhansController : ControllerBase
+    public class GanHocPhanController : ControllerBase
     {
         private readonly TrainingProgramDbContext _context;
 
-        public GanHocPhansController(TrainingProgramDbContext context)
+        public GanHocPhanController(TrainingProgramDbContext context)
         {
             _context = context;
         }

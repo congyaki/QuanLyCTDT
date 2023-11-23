@@ -11,13 +11,13 @@ using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ChuongTrinhDaoTaosController : ControllerBase
+    public class ChuongTrinhDaoTaoController : ControllerBase
     {
         private readonly TrainingProgramDbContext _context;
 
-        public ChuongTrinhDaoTaosController(TrainingProgramDbContext context)
+        public ChuongTrinhDaoTaoController(TrainingProgramDbContext context)
         {
             _context = context;
         }
@@ -77,34 +77,6 @@ namespace QL_CTDT.BackendAPI.Controllers
                     .ToList()
             }))
             .FirstOrDefault();
-            /*var khoiKienThucs = _context.KhoiKienThucs
-      .Select(kkt => new CTDT_KKT_VM()
-      {
-          TenKKT = kkt.Ten,
-          HocPhans = _context.GanHocPhans
-            .Where(ganHP => ganHP.CTDT_KKT.KhoiKienThuc.MaKKT == kkt.MaKKT).Select(ganHP => new HocPhan_VM()
-          {
-                MaHocPhan = ganHP.HocPhan.MaHocPhan,
-                Ten = ganHP.HocPhan.Ten,
-                MoTa = ganHP.HocPhan.MoTa,
-                SoTinChi = ganHP.HocPhan.SoTinChi,
-                MaKhoa = ganHP.HocPhan.MaKhoa
-            }).ToList()
-      })
-      .ToList();*/
-            /*var hocPhans = await (
-                from ctdt_kkt in _context.CTDT_KKTs
-                join kkt in _context.KhoiKienThucs on ctdt_kkt.MaKKT equals kkt.MaKKT
-                join ganHP in _context.GanHocPhans on ctdt_kkt.MaCTDT_KKT equals ganHP.MaCTDT_KKT
-                join hp in _context.HocPhans on ganHP.MaHocPhan equals hp.MaHocPhan
-                where ctdt_kkt.MaCTDT == id
-                select new CTDT_KKT_VM()
-                {
-                    TenKKT = kkt.Ten,
-                    TongSoHocPhan = ganHP.MaHocPhan.Count,
-                    HocPhan = 
-                }
-                ); */
 
             if (chiTietCTDT == null)
             {

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.Khoa>
+
+@{
+    ViewData["Title"] = "Quản Lý Khoa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
+
+<!-- DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                            <button type="button" onclick="window.location.href='/Manufacturer/Index'" class="btn btn-dark">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center align-middle">
+                            ID
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên
+                        </th>
+                        <th class="text-center align-middle">
+                            Mô Tả
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var khoa in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => khoa.MaKhoa)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Details" asp-route-id="@khoa.MaKhoa">
+                                    @Html.DisplayFor(modelItem => khoa.Ten)
+                                </a>
+                            </td>
+                            <td class="align-middle text-center">
+                                @Html.DisplayFor(modelItem => khoa.MoTa)
+                            </td>
+                            <td class="text-center align-middle">
+                                    <a asp-action="Edit" asp-route-id="@khoa.MaKhoa" class="btn btn-warning mr-2">
+                                        <span class="text">Sửa</span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@khoa.MaKhoa" class="btn btn-danger">
+                                        <span class="text">Xóa</span>
+                                    </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

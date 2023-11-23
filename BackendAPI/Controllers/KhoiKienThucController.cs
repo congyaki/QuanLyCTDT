@@ -11,7 +11,7 @@ using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class KhoiKienThucController : ControllerBase
     {

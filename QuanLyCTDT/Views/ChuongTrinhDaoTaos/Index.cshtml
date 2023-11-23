@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoNamDaoTao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Khoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KhoaHoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nganh)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoNamDaoTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Khoa.MaKhoa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoaHoc.MaKhoaHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nganh.MaNganh)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaCTDT">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaCTDT">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaCTDT">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

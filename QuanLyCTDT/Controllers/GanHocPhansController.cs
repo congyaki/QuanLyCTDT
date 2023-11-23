@@ -5,12 +5,12 @@ using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
 {
-    public class DanhMucCTDTsController : Controller
+    public class GanHocPhansController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:7262/api");
         private readonly HttpClient _httpClient;
 
-        public DanhMucCTDTsController()
+        public GanHocPhansController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = baseAddress;
@@ -19,26 +19,26 @@ namespace QuanLyCTDT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<DanhMucCTDT> danhMucCTDTs = new List<DanhMucCTDT>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT/GetDanhMucCTDTs").Result;
+            List<GanHocPhan> ganHocPhans = new List<GanHocPhan>();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/GanHocPhan/GetGanHocPhans").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDTs = JsonConvert.DeserializeObject<List<DanhMucCTDT>>(data);
+                ganHocPhans = JsonConvert.DeserializeObject<List<GanHocPhan>>(data);
             }
-            return View(danhMucCTDTs);
+            return View(ganHocPhans);
         }
 
         // GET: DanhMucCTDTsController/Details/5
         [HttpGet("{id}")]
         public IActionResult Details()
         {
-            DanhMucCTDT danhMucCTDT = new DanhMucCTDT();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/DanhMucCTDT/GetDanhMucCTDT").Result;
+            GanHocPhan danhMucCTDT = new GanHocPhan();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/GanHocPhan/GetGanHocPhans").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT = JsonConvert.DeserializeObject<DanhMucCTDT>(data);
+                danhMucCTDT = JsonConvert.DeserializeObject<GanHocPhan>(data);
             }
             return View(danhMucCTDT);
         }
