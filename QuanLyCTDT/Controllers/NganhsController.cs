@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
 {
     public class NganhsController : Controller
     {
-        // GET: NganhsController
+       
         Uri baseAddress = new Uri("https://localhost:7262/api");
         private readonly HttpClient _httpClient;
 
@@ -44,67 +50,150 @@ namespace QuanLyCTDT.Controllers
             return View(nganh);
         }
 
-        // GET: NganhsController/Create
-        public ActionResult Create()
+        // GET: Nganhs
+        /*public async Task<IActionResult> Index()
         {
+            var trainingProgramDbContext = _context.Nganhs.Include(n => n.Khoa);
+            return View(await trainingProgramDbContext.ToListAsync());
+        }
+
+        // GET: Nganhs/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null || _context.Nganhs == null)
+            {
+                return NotFound();
+            }
+
+            var nganh = await _context.Nganhs
+                .Include(n => n.Khoa)
+                .FirstOrDefaultAsync(m => m.MaNganh == id);
+            if (nganh == null)
+            {
+                return NotFound();
+            }
+
+            return View(nganh);
+        }*/
+
+        // GET: Nganhs/Create
+        /*public IActionResult Create()
+        {
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
             return View();
         }
 
-        // POST: NganhsController/Create
+        // POST: Nganhs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(nganh);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", nganh.MaKhoa);
+            return View(nganh);
         }
 
-        // GET: NganhsController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Nganhs/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.Nganhs == null)
+            {
+                return NotFound();
+            }
+
+            var nganh = await _context.Nganhs.FindAsync(id);
+            if (nganh == null)
+            {
+                return NotFound();
+            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", nganh.MaKhoa);
+            return View(nganh);
         }
 
-        // POST: NganhsController/Edit/5
+        // POST: Nganhs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
         {
-            try
+            if (id != nganh.MaNganh)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(nganh);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!NganhExists(nganh.MaNganh))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", nganh.MaKhoa);
+            return View(nganh);
         }
 
-        // GET: NganhsController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Nganhs/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.Nganhs == null)
+            {
+                return NotFound();
+            }
+
+            var nganh = await _context.Nganhs
+                .Include(n => n.Khoa)
+                .FirstOrDefaultAsync(m => m.MaNganh == id);
+            if (nganh == null)
+            {
+                return NotFound();
+            }
+
+            return View(nganh);
         }
 
-        // POST: NganhsController/Delete/5
-        [HttpPost]
+        // POST: Nganhs/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.Nganhs == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.Nganhs'  is null.");
             }
-            catch
+            var nganh = await _context.Nganhs.FindAsync(id);
+            if (nganh != null)
             {
-                return View();
+                _context.Nganhs.Remove(nganh);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool NganhExists(string id)
+        {
+          return (_context.Nganhs?.Any(e => e.MaNganh == id)).GetValueOrDefault();
+        }*/
     }
 }

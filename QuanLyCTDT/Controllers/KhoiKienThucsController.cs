@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
@@ -43,67 +49,119 @@ namespace QuanLyCTDT.Controllers
             return View(khoiKienThuc);
         }
 
-        // GET: KhoiKienThucsController/Create
-        public ActionResult Create()
+        // GET: KhoiKienThucs/Create
+        /*public IActionResult Create()
         {
             return View();
         }
 
-        // POST: KhoiKienThucsController/Create
+        // POST: KhoiKienThucs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(khoiKienThuc);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(khoiKienThuc);
         }
 
-        // GET: KhoiKienThucsController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: KhoiKienThucs/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.KhoiKienThucs == null)
+            {
+                return NotFound();
+            }
+
+            var khoiKienThuc = await _context.KhoiKienThucs.FindAsync(id);
+            if (khoiKienThuc == null)
+            {
+                return NotFound();
+            }
+            return View(khoiKienThuc);
         }
 
-        // POST: KhoiKienThucsController/Edit/5
+        // POST: KhoiKienThucs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
         {
-            try
+            if (id != khoiKienThuc.MaKKT)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(khoiKienThuc);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!KhoiKienThucExists(khoiKienThuc.MaKKT))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(khoiKienThuc);
         }
 
-        // GET: KhoiKienThucsController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: KhoiKienThucs/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.KhoiKienThucs == null)
+            {
+                return NotFound();
+            }
+
+            var khoiKienThuc = await _context.KhoiKienThucs
+                .FirstOrDefaultAsync(m => m.MaKKT == id);
+            if (khoiKienThuc == null)
+            {
+                return NotFound();
+            }
+
+            return View(khoiKienThuc);
         }
 
-        // POST: KhoiKienThucsController/Delete/5
-        [HttpPost]
+        // POST: KhoiKienThucs/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.KhoiKienThucs == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.KhoiKienThucs'  is null.");
             }
-            catch
+            var khoiKienThuc = await _context.KhoiKienThucs.FindAsync(id);
+            if (khoiKienThuc != null)
             {
-                return View();
+                _context.KhoiKienThucs.Remove(khoiKienThuc);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool KhoiKienThucExists(string id)
+        {
+          return (_context.KhoiKienThucs?.Any(e => e.MaKKT == id)).GetValueOrDefault();
+        }*/
     }
 }

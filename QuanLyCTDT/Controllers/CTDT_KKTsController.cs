@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
-using System.Net.Http;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -45,67 +50,129 @@ namespace QuanLyCTDT.Controllers
             return View(ctdt_kkt);
         }
 
-        // GET: CTDT_KKTsController/Create
-        public ActionResult Create()
+        // GET: CTDT_KKTs/Create
+        /*public IActionResult Create()
         {
+            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "MaCTDT");
+            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "MaKKT");
             return View();
         }
 
-        // POST: CTDT_KKTsController/Create
+        // POST: CTDT_KKTs/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaCTDT_KKT,MaCTDT,MaKKT")] CTDT_KKT cTDT_KKT)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(cTDT_KKT);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "MaCTDT", cTDT_KKT.MaCTDT);
+            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "MaKKT", cTDT_KKT.MaKKT);
+            return View(cTDT_KKT);
         }
 
-        // GET: CTDT_KKTsController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: CTDT_KKTs/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.CTDT_KKTs == null)
+            {
+                return NotFound();
+            }
+
+            var cTDT_KKT = await _context.CTDT_KKTs.FindAsync(id);
+            if (cTDT_KKT == null)
+            {
+                return NotFound();
+            }
+            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "MaCTDT", cTDT_KKT.MaCTDT);
+            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "MaKKT", cTDT_KKT.MaKKT);
+            return View(cTDT_KKT);
         }
 
-        // POST: CTDT_KKTsController/Edit/5
+        // POST: CTDT_KKTs/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaCTDT_KKT,MaCTDT,MaKKT")] CTDT_KKT cTDT_KKT)
         {
-            try
+            if (id != cTDT_KKT.MaCTDT_KKT)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(cTDT_KKT);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CTDT_KKTExists(cTDT_KKT.MaCTDT_KKT))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "MaCTDT", cTDT_KKT.MaCTDT);
+            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "MaKKT", cTDT_KKT.MaKKT);
+            return View(cTDT_KKT);
         }
 
-        // GET: CTDT_KKTsController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: CTDT_KKTs/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.CTDT_KKTs == null)
+            {
+                return NotFound();
+            }
+
+            var cTDT_KKT = await _context.CTDT_KKTs
+                .Include(c => c.ChuongTrinhDaoTao)
+                .Include(c => c.KhoiKienThuc)
+                .FirstOrDefaultAsync(m => m.MaCTDT_KKT == id);
+            if (cTDT_KKT == null)
+            {
+                return NotFound();
+            }
+
+            return View(cTDT_KKT);
         }
 
-        // POST: CTDT_KKTsController/Delete/5
-        [HttpPost]
+        // POST: CTDT_KKTs/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.CTDT_KKTs == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.CTDT_KKTs'  is null.");
             }
-            catch
+            var cTDT_KKT = await _context.CTDT_KKTs.FindAsync(id);
+            if (cTDT_KKT != null)
             {
-                return View();
+                _context.CTDT_KKTs.Remove(cTDT_KKT);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool CTDT_KKTExists(string id)
+        {
+          return (_context.CTDT_KKTs?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
+        }*/
     }
 }

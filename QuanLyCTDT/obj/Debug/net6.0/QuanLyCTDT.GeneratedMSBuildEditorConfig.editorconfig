@@ -36,6 +36,66 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/CTDT_KKTs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/CTDT_KKTs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/CTDT_KKTs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/CTDT_KKTs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/CTDT_KKTs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/GanHocPhans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/GanHocPhans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/GanHocPhans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/GanHocPhans/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/GanHocPhans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/HocPhans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/HocPhans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/HocPhans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/HocPhans/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/HocPhans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,36 +104,84 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoaHocs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoaHocs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoaHocs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoaHocs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoaHocs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Khoas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Khoas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Khoas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Khoas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Khoas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs1/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzMVxDcmVhdGUuY3NodG1s
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoiKienThucs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs1/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzMVxEZWxldGUuY3NodG1s
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoiKienThucs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs1/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzMVxEZXRhaWxzLmNzaHRtbA==
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoiKienThucs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs1/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzMVxFZGl0LmNzaHRtbA==
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoiKienThucs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs1/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzMVxJbmRleC5jc2h0bWw=
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/KhoiKienThucs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Nganhs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/WorkSpace/c_sharp/QuanLyCTDT/QuanLyCTDT/Views/Shared/Error.cshtml]

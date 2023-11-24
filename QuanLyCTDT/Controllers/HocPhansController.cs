@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
@@ -43,67 +49,124 @@ namespace QuanLyCTDT.Controllers
             return View(hocPhan);
         }
 
-        // GET: HocPhansController/Create
-        public ActionResult Create()
+        // GET: HocPhans/Create
+        /*public IActionResult Create()
         {
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
             return View();
         }
 
-        // POST: HocPhansController/Create
+        // POST: HocPhans/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(hocPhan);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", hocPhan.MaKhoa);
+            return View(hocPhan);
         }
 
-        // GET: HocPhansController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: HocPhans/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.HocPhans == null)
+            {
+                return NotFound();
+            }
+
+            var hocPhan = await _context.HocPhans.FindAsync(id);
+            if (hocPhan == null)
+            {
+                return NotFound();
+            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", hocPhan.MaKhoa);
+            return View(hocPhan);
         }
 
-        // POST: HocPhansController/Edit/5
+        // POST: HocPhans/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
         {
-            try
+            if (id != hocPhan.MaHocPhan)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(hocPhan);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!HocPhanExists(hocPhan.MaHocPhan))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", hocPhan.MaKhoa);
+            return View(hocPhan);
         }
 
-        // GET: HocPhansController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: HocPhans/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.HocPhans == null)
+            {
+                return NotFound();
+            }
+
+            var hocPhan = await _context.HocPhans
+                .Include(h => h.Khoa)
+                .FirstOrDefaultAsync(m => m.MaHocPhan == id);
+            if (hocPhan == null)
+            {
+                return NotFound();
+            }
+
+            return View(hocPhan);
         }
 
-        // POST: HocPhansController/Delete/5
-        [HttpPost]
+        // POST: HocPhans/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.HocPhans == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.HocPhans'  is null.");
             }
-            catch
+            var hocPhan = await _context.HocPhans.FindAsync(id);
+            if (hocPhan != null)
             {
-                return View();
+                _context.HocPhans.Remove(hocPhan);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool HocPhanExists(string id)
+        {
+          return (_context.HocPhans?.Any(e => e.MaHocPhan == id)).GetValueOrDefault();
+        }*/
     }
 }

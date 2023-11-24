@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
@@ -43,67 +49,129 @@ namespace QuanLyCTDT.Controllers
             return View(danhMucCTDT);
         }
 
-        // GET: DanhMucCTDTsController/Create
-        public ActionResult Create()
+        // GET: GanHocPhans/Create
+        /*public IActionResult Create()
         {
+            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT");
+            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan");
             return View();
         }
 
-        // POST: DanhMucCTDTsController/Create
+        // POST: GanHocPhans/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaCTDT_KKT,MaHocPhan")] GanHocPhan ganHocPhan)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(ganHocPhan);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT", ganHocPhan.MaCTDT_KKT);
+            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan", ganHocPhan.MaHocPhan);
+            return View(ganHocPhan);
         }
 
-        // GET: DanhMucCTDTsController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: GanHocPhans/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.GanHocPhans == null)
+            {
+                return NotFound();
+            }
+
+            var ganHocPhan = await _context.GanHocPhans.FindAsync(id);
+            if (ganHocPhan == null)
+            {
+                return NotFound();
+            }
+            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT", ganHocPhan.MaCTDT_KKT);
+            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan", ganHocPhan.MaHocPhan);
+            return View(ganHocPhan);
         }
 
-        // POST: DanhMucCTDTsController/Edit/5
+        // POST: GanHocPhans/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaCTDT_KKT,MaHocPhan")] GanHocPhan ganHocPhan)
         {
-            try
+            if (id != ganHocPhan.MaCTDT_KKT)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(ganHocPhan);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!GanHocPhanExists(ganHocPhan.MaCTDT_KKT))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT", ganHocPhan.MaCTDT_KKT);
+            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan", ganHocPhan.MaHocPhan);
+            return View(ganHocPhan);
         }
 
-        // GET: DanhMucCTDTsController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: GanHocPhans/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.GanHocPhans == null)
+            {
+                return NotFound();
+            }
+
+            var ganHocPhan = await _context.GanHocPhans
+                .Include(g => g.CTDT_KKT)
+                .Include(g => g.HocPhan)
+                .FirstOrDefaultAsync(m => m.MaCTDT_KKT == id);
+            if (ganHocPhan == null)
+            {
+                return NotFound();
+            }
+
+            return View(ganHocPhan);
         }
 
-        // POST: DanhMucCTDTsController/Delete/5
-        [HttpPost]
+        // POST: GanHocPhans/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.GanHocPhans == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.GanHocPhans'  is null.");
             }
-            catch
+            var ganHocPhan = await _context.GanHocPhans.FindAsync(id);
+            if (ganHocPhan != null)
             {
-                return View();
+                _context.GanHocPhans.Remove(ganHocPhan);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool GanHocPhanExists(string id)
+        {
+          return (_context.GanHocPhans?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
+        }*/
     }
 }

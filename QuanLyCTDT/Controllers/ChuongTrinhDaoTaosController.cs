@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 
 namespace QuanLyCTDT.Controllers
@@ -43,67 +49,134 @@ namespace QuanLyCTDT.Controllers
             return View(ctdt);
         }
 
-        // GET: DanhMucCTDT_KKTs/Create
-        public ActionResult Create()
+        // GET: ChuongTrinhDaoTaos/Create
+        /*public IActionResult Create()
         {
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc");
+            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh");
             return View();
         }
 
-        // POST: DanhMucCTDT_KKTs/Create
+        // POST: ChuongTrinhDaoTaos/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("MaCTDT,Ten,MaKhoa,MaKhoaHoc,MaNganh,SoNamDaoTao")] ChuongTrinhDaoTao chuongTrinhDaoTao)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(chuongTrinhDaoTao);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", chuongTrinhDaoTao.MaKhoa);
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc", chuongTrinhDaoTao.MaKhoaHoc);
+            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh", chuongTrinhDaoTao.MaNganh);
+            return View(chuongTrinhDaoTao);
         }
 
-        // GET: DanhMucCTDT_KKTs/Edit/5
-        public ActionResult Edit(int id)
+        // GET: ChuongTrinhDaoTaos/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            if (id == null || _context.ChuongTrinhDaoTaos == null)
+            {
+                return NotFound();
+            }
+
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos.FindAsync(id);
+            if (chuongTrinhDaoTao == null)
+            {
+                return NotFound();
+            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", chuongTrinhDaoTao.MaKhoa);
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc", chuongTrinhDaoTao.MaKhoaHoc);
+            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh", chuongTrinhDaoTao.MaNganh);
+            return View(chuongTrinhDaoTao);
         }
 
-        // POST: DanhMucCTDT_KKTs/Edit/5
+        // POST: ChuongTrinhDaoTaos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, [Bind("MaCTDT,Ten,MaKhoa,MaKhoaHoc,MaNganh,SoNamDaoTao")] ChuongTrinhDaoTao chuongTrinhDaoTao)
         {
-            try
+            if (id != chuongTrinhDaoTao.MaCTDT)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(chuongTrinhDaoTao);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ChuongTrinhDaoTaoExists(chuongTrinhDaoTao.MaCTDT))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", chuongTrinhDaoTao.MaKhoa);
+            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc", chuongTrinhDaoTao.MaKhoaHoc);
+            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh", chuongTrinhDaoTao.MaNganh);
+            return View(chuongTrinhDaoTao);
         }
 
-        // GET: DanhMucCTDT_KKTs/Delete/5
-        public ActionResult Delete(int id)
+        // GET: ChuongTrinhDaoTaos/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            if (id == null || _context.ChuongTrinhDaoTaos == null)
+            {
+                return NotFound();
+            }
+
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos
+                .Include(c => c.Khoa)
+                .Include(c => c.KhoaHoc)
+                .Include(c => c.Nganh)
+                .FirstOrDefaultAsync(m => m.MaCTDT == id);
+            if (chuongTrinhDaoTao == null)
+            {
+                return NotFound();
+            }
+
+            return View(chuongTrinhDaoTao);
         }
 
-        // POST: DanhMucCTDT_KKTs/Delete/5
-        [HttpPost]
+        // POST: ChuongTrinhDaoTaos/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            try
+            if (_context.ChuongTrinhDaoTaos == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'TrainingProgramDbContext.ChuongTrinhDaoTaos'  is null.");
             }
-            catch
+            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos.FindAsync(id);
+            if (chuongTrinhDaoTao != null)
             {
-                return View();
+                _context.ChuongTrinhDaoTaos.Remove(chuongTrinhDaoTao);
             }
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+
+        private bool ChuongTrinhDaoTaoExists(string id)
+        {
+          return (_context.ChuongTrinhDaoTaos?.Any(e => e.MaCTDT == id)).GetValueOrDefault();
+        }*/
     }
 }
