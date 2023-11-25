@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QL_CTDT.Data.Models.EF;
 
@@ -11,9 +12,10 @@ using QL_CTDT.Data.Models.EF;
 namespace QL_CTDT.Data.Migrations
 {
     [DbContext(typeof(TrainingProgramDbContext))]
-    partial class TrainingProgramDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124104452_UpdateCTDT_KKT")]
+    partial class UpdateCTDT_KKT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

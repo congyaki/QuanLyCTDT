@@ -12,5 +12,7 @@ namespace QL_CTDT.Data.Models.ViewModels
         public string Ten { get; set; }
         public string MoTa { get; set; }
         public string? MaKhoa { get; set; }
+        public string? TenKhoa { get; set; }
+
     }
 }

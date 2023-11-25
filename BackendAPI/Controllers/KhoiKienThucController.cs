@@ -61,7 +61,6 @@ namespace QL_CTDT.BackendAPI.Controllers
             {
                 return BadRequest();
             }
-
             _kKT.Ten = kKT.Ten;
             _kKT.MoTa = kKT.MoTa;
 
@@ -89,7 +88,7 @@ namespace QL_CTDT.BackendAPI.Controllers
         // POST: api/KhoiKienThuc
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<KhoiKienThuc>> PostKhoiKienThuc(KhoiKienThuc kKT)
+        public async Task<ActionResult<KhoiKienThuc>> PostKhoiKienThuc(KhoiKienThuc_VM kKT)
         {
           if (_context.KhoiKienThucs == null)
           {

@@ -34,12 +34,17 @@ namespace QL_CTDT.BackendAPI.Controllers
                         join k in _context.Khoas on ctdt.MaKhoa equals k.MaKhoa
                         join kh in _context.KhoaHocs on ctdt.MaKhoaHoc equals kh.MaKhoaHoc
                         join n in _context.Nganhs on ctdt.MaNganh equals n.MaNganh
-                        select new DanhMucCTDT_VM()
+                        select new CTDT_VM()
                         {
+                            MaCTDT = ctdt.MaCTDT,
                             TenCTDT = ctdt.Ten,
+                            MaKhoa = ctdt.MaKhoa,
                             TenKhoa = k.Ten,
+                            MaKhoaHoc = ctdt.MaKhoaHoc,
                             TenKhoaHoc = kh.Ten,
+                            MaNganh = ctdt.MaNganh,
                             TenNganh = n.Ten,
+                            SoNamDaoTao = ctdt.SoNamDaoTao,
                         }).ToListAsync();
             return Ok(model);
         }
@@ -89,14 +94,22 @@ namespace QL_CTDT.BackendAPI.Controllers
         // PUT: api/ChuongTrinhDaoTaos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChuongTrinhDaoTao(string id, ChuongTrinhDaoTao chuongTrinhDaoTao)
+        public async Task<IActionResult> PutChuongTrinhDaoTao(string id, CTDT_VM ctdt_VM)
         {
-            if (id != chuongTrinhDaoTao.MaCTDT)
+            var ctdt = await _context.ChuongTrinhDaoTaos.FindAsync(id);
+            if (id != ctdt.MaCTDT)
             {
                 return BadRequest();
             }
 
-            _context.Entry(chuongTrinhDaoTao).State = EntityState.Modified;
+            ctdt.MaCTDT = ctdt_VM.MaNganh + " - " + ctdt_VM.MaKhoaHoc;
+            ctdt.Ten = ctdt_VM.TenNganh + " - " + ctdt_VM.TenKhoaHoc;
+            ctdt.MaKhoa = ctdt_VM.MaKhoa;
+            ctdt.MaKhoaHoc = ctdt_VM.MaKhoaHoc;
+            ctdt.MaNganh = ctdt.MaNganh;
+            ctdt.SoNamDaoTao = (float)ctdt_VM.SoNamDaoTao;
+
+            _context.Entry(ctdt).State = EntityState.Modified;
 
             try
             {

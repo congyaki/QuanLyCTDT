@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.BackendAPI.Controllers
 {
@@ -23,13 +24,21 @@ namespace QL_CTDT.BackendAPI.Controllers
 
         // GET: api/CTDT_KKTs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CTDT_KKT>>> GetCTDT_KKTs()
+        public async Task<ActionResult<IEnumerable<CTDT_KKT_VM>>> GetCTDT_KKTs()
         {
-          if (_context.CTDT_KKTs == null)
-          {
-              return NotFound();
-          }
-            return await _context.CTDT_KKTs.ToListAsync();
+            if (_context.CTDT_KKTs == null)
+            {
+                return NotFound();
+            }
+            List<CTDT_KKT_VM> danhSachCTDT_KKT = await _context.CTDT_KKTs
+                  .Select(e => new CTDT_KKT_VM()
+                  {
+                      MaCTDT_KKT = e.MaCTDT_KKT,
+                      TenCTDT_KKT = e.TenCTDT_KKT,
+                      TenCTDT = e.ChuongTrinhDaoTao.Ten,
+                      TenKKT = e.KhoiKienThuc.Ten,
+                  }).ToListAsync();
+            return Ok(danhSachCTDT_KKT);
         }
 
         // GET: api/CTDT_KKTs/5
@@ -40,27 +49,43 @@ namespace QL_CTDT.BackendAPI.Controllers
           {
               return NotFound();
           }
-            var cTDT_KKT = await _context.CTDT_KKTs.FindAsync(id);
+            CTDT_KKT_VM ck = await _context.CTDT_KKTs
+                .Where(p => p.MaCTDT_KKT == id)
+                  .Select(e => new CTDT_KKT_VM
+                  {
+                      MaCTDT_KKT = e.MaCTDT_KKT,
+                      TenCTDT_KKT = e.TenCTDT_KKT,
+                      TenCTDT = e.ChuongTrinhDaoTao.Ten,
+                      TenKKT = e.KhoiKienThuc.Ten,
+                  }).FirstOrDefaultAsync();
 
-            if (cTDT_KKT == null)
+            if (ck == null)
             {
                 return NotFound();
             }
 
-            return cTDT_KKT;
+            return Ok(ck);
         }
 
         // PUT: api/CTDT_KKTs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCTDT_KKT(string id, CTDT_KKT cTDT_KKT)
+        public async Task<IActionResult> PutCTDT_KKT(string id, CTDT_KKT_VM ck_VM)
         {
-            if (id != cTDT_KKT.MaCTDT_KKT)
+            var ck = _context.CTDT_KKTs.FirstOrDefault(p => p.MaCTDT_KKT == id);
+
+            if (id != ck.MaCTDT_KKT)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cTDT_KKT).State = EntityState.Modified;
+            ck.MaCTDT = ck_VM.MaCTDT;
+            ck.MaKKT = ck_VM.MaKKT;
+            string tenCTDT = _context.ChuongTrinhDaoTaos.Where(p => p.MaCTDT == ck_VM.MaCTDT).Select(p => p.Ten).FirstOrDefault();
+            string tenKKT = _context.KhoiKienThucs.Where(p => p.MaKKT == ck_VM.MaKKT).Select(p => p.Ten).FirstOrDefault();
+            ck.TenCTDT_KKT = tenCTDT + " - " + tenKKT;
+
+            _context.Entry(ck).State = EntityState.Modified;
 
             try
             {
@@ -84,20 +109,30 @@ namespace QL_CTDT.BackendAPI.Controllers
         // POST: api/CTDT_KKTs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CTDT_KKT>> PostCTDT_KKT(CTDT_KKT cTDT_KKT)
+        public async Task<ActionResult<CTDT_KKT>> PostCTDT_KKT(CTDT_KKT_VM ck_VM)
         {
-          if (_context.CTDT_KKTs == null)
-          {
-              return Problem("Entity set 'TrainingProgramDbContext.CTDT_KKTs'  is null.");
-          }
-            _context.CTDT_KKTs.Add(cTDT_KKT);
+            if (_context.CTDT_KKTs == null)
+            {
+                return Problem("Entity set 'TrainingProgramDbContext.CTDT_KKTs'  is null.");
+            }
+            string tenCTDT = _context.ChuongTrinhDaoTaos.Where(p => p.MaCTDT == ck_VM.MaCTDT).Select(p => p.Ten).FirstOrDefault();
+            string tenKKT = _context.KhoiKienThucs.Where(p => p.MaKKT == ck_VM.MaKKT).Select(p => p.Ten).FirstOrDefault();
+            var ck = new CTDT_KKT
+            {
+                MaCTDT_KKT = ck_VM.MaCTDT + " - " + ck_VM.MaKKT,
+                MaCTDT = ck_VM.MaCTDT,
+                MaKKT = ck_VM.MaKKT,
+                TenCTDT_KKT = tenCTDT + " - " + tenKKT
+            };
+
+            _context.CTDT_KKTs.Add(ck);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CTDT_KKTExists(cTDT_KKT.MaCTDT_KKT))
+                if (CTDT_KKTExists(ck.MaCTDT_KKT))
                 {
                     return Conflict();
                 }
@@ -107,7 +142,7 @@ namespace QL_CTDT.BackendAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCTDT_KKT", new { id = cTDT_KKT.MaCTDT_KKT }, cTDT_KKT);
+            return CreatedAtAction("GetCTDT_KKT", new { id = ck.MaCTDT_KKT }, ck);
         }
 
         // DELETE: api/CTDT_KKTs/5

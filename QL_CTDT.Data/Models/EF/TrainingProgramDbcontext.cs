@@ -165,8 +165,8 @@ namespace QL_CTDT.Data.Models.EF
             // Thêm dữ liệu cho các chi tiết CTĐT khác
             );
             modelBuilder.Entity<CTDT_KKT>().HasData(
-                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT1", MaCTDT = "CTDT1", MaKKT = "KKT1" },
-                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT2", MaCTDT = "CTDT1", MaKKT = "KKT2" }
+                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT1", MaCTDT = "CTDT1", TenCTDT_KKT = "CTDT1_KKT1", MaKKT = "KKT1" },
+                new CTDT_KKT { MaCTDT_KKT = "CTDT_KKT2", MaCTDT = "CTDT1", TenCTDT_KKT = "CTDT2_KKT1", MaKKT = "KKT2" }
             // Thêm dữ liệu cho các mối quan hệ giữa danh mục CTĐT và khối kiến thức khác
             );
             modelBuilder.Entity<GanHocPhan>().HasData(

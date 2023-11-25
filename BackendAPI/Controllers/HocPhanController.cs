@@ -24,7 +24,7 @@ namespace QL_CTDT.BackendAPI.Controllers
 
         // GET: api/HocPhan
         [HttpGet]
-        public async Task<ActionResult<List<HocPhanKhoa_VM>>> GetHocPhans()
+        public async Task<ActionResult<List<HocPhan_VM>>> GetHocPhans()
         {
           if (_context.HocPhans == null)
           {
@@ -34,7 +34,7 @@ namespace QL_CTDT.BackendAPI.Controllers
             var model = from hp in _context.HocPhans
                         join k in _context.Khoas
                         on hp.MaKhoa equals k.MaKhoa
-                        select new HocPhanKhoa_VM()
+                        select new HocPhan_VM()
                         {
                             MaHocPhan = hp.MaHocPhan,
                             Ten = hp.Ten,
@@ -47,7 +47,7 @@ namespace QL_CTDT.BackendAPI.Controllers
 
         // GET: api/HocPhan/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<HocPhanKhoa_VM>> GetHocPhan(string id)
+        public async Task<ActionResult<HocPhan_VM>> GetHocPhan(string id)
         {
           if (_context.HocPhans == null)
           {
@@ -57,7 +57,7 @@ namespace QL_CTDT.BackendAPI.Controllers
                     join k in _context.Khoas
                     on hp.MaKhoa equals k.MaKhoa
                     where hp.MaHocPhan == id
-                    select new HocPhanKhoa_VM()
+                    select new HocPhan_VM()
                     {
                         MaHocPhan = hp.MaHocPhan,
                         Ten = hp.Ten,

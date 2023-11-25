@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -24,31 +25,51 @@ namespace QL_CTDT.BackendAPI.Controllers
 
         // GET: api/Nganh
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Nganh>>> GetNganhs()
+        public async Task<ActionResult<IEnumerable<Nganh_VM>>> GetNganhs()
         {
-          if (_context.Nganhs == null)
+
+            if (_context.Nganhs == null)
           {
               return NotFound();
           }
-            return await _context.Nganhs.ToListAsync();
+            List<Nganh_VM> danhSachNganhVM = await _context.Nganhs
+                .Select(nganh => new Nganh_VM
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                    TenKhoa = nganh.Khoa.Ten
+                })
+                .ToListAsync();
+            return Ok(danhSachNganhVM);
         }
 
         // GET: api/Nganh/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Nganh>> GetNganh(string id)
+        public async Task<ActionResult<Nganh_VM>> GetNganh(string id)
         {
           if (_context.Nganhs == null)
           {
               return NotFound();
           }
-            var nganh = await _context.Nganhs.FindAsync(id);
+            var nganh = await _context.Nganhs
+                .Where(p => p.MaNganh == id)
+                .Select(nganh => new Nganh_VM
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                    TenKhoa = nganh.Khoa.Ten
+                }).FirstOrDefaultAsync();
 
             if (nganh == null)
             {
                 return NotFound();
             }
 
-            return nganh;
+            return Ok(nganh);
         }
 
         // PUT: api/Nganh/5
@@ -62,7 +83,6 @@ namespace QL_CTDT.BackendAPI.Controllers
             {
                 return BadRequest();
             }
-
             _nganh.Ten = nganh.Ten;
             _nganh.MoTa = nganh.MoTa;
             _nganh.MaKhoa = nganh.MaKhoa;
