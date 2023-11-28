@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.Nganh>
+﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.Nganh_VM>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.MoTa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Khoa)
+                @Html.DisplayNameFor(model => model.TenKhoa)
             </th>
             <th></th>
         </tr>
@@ -34,11 +34,11 @@
                 @Html.DisplayFor(modelItem => item.MoTa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Khoa.MaKhoa)
+                @Html.DisplayFor(modelItem => item.TenKhoa)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaNganh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaNganh">Details</a> |
+                <a asp-action="Edit" asp-controller="Nganhs" asp-route-id="@item.MaNganh">Edit</a> |
+                <a asp-action="Details" asp-controller="Nganhs"  asp-route-id="@item.MaNganh">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.MaNganh">Delete</a>
             </td>
         </tr>

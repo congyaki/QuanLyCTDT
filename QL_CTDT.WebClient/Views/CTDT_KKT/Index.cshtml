@@ -1,0 +1,47 @@
+﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.CTDT_KKT>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenCTDT_KKT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KhoiKienThuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChuongTrinhDaoTao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenCTDT_KKT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhoiKienThuc.MaKKT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChuongTrinhDaoTao.MaCTDT)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MaCTDT_KKT">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MaCTDT_KKT">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MaCTDT_KKT">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

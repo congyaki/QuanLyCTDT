@@ -102,11 +102,10 @@ namespace QL_CTDT.BackendAPI.Controllers
                 return BadRequest();
             }
 
-            ctdt.MaCTDT = ctdt_VM.MaNganh + " - " + ctdt_VM.MaKhoaHoc;
             ctdt.Ten = ctdt_VM.TenNganh + " - " + ctdt_VM.TenKhoaHoc;
             ctdt.MaKhoa = ctdt_VM.MaKhoa;
             ctdt.MaKhoaHoc = ctdt_VM.MaKhoaHoc;
-            ctdt.MaNganh = ctdt.MaNganh;
+            ctdt.MaNganh = ctdt_VM.MaNganh;
             ctdt.SoNamDaoTao = (float)ctdt_VM.SoNamDaoTao;
 
             _context.Entry(ctdt).State = EntityState.Modified;
@@ -133,20 +132,31 @@ namespace QL_CTDT.BackendAPI.Controllers
         // POST: api/ChuongTrinhDaoTaos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ChuongTrinhDaoTao>> PostChuongTrinhDaoTao(ChuongTrinhDaoTao chuongTrinhDaoTao)
+        public async Task<ActionResult<ChuongTrinhDaoTao>> PostChuongTrinhDaoTao(CTDT_VM ctdt_VM)
         {
           if (_context.ChuongTrinhDaoTaos == null)
           {
               return Problem("Entity set 'TrainingProgramDbContext.ChuongTrinhDaoTaos'  is null.");
           }
-            _context.ChuongTrinhDaoTaos.Add(chuongTrinhDaoTao);
+
+          var ctdt = new ChuongTrinhDaoTao()
+            {
+            MaCTDT = ctdt_VM.MaNganh + " - " + ctdt_VM.MaKhoaHoc,
+            Ten = ctdt_VM.TenNganh + " - " + ctdt_VM.TenKhoaHoc,
+            MaKhoa = ctdt_VM.MaKhoa,
+            MaKhoaHoc = ctdt_VM.MaKhoaHoc,
+            MaNganh = ctdt_VM.MaNganh,
+            SoNamDaoTao = (float)ctdt_VM.SoNamDaoTao
+            };
+
+            _context.ChuongTrinhDaoTaos.Add(ctdt);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ChuongTrinhDaoTaoExists(chuongTrinhDaoTao.MaCTDT))
+                if (ChuongTrinhDaoTaoExists(ctdt.MaCTDT))
                 {
                     return Conflict();
                 }
@@ -156,7 +166,7 @@ namespace QL_CTDT.BackendAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetChuongTrinhDaoTao", new { id = chuongTrinhDaoTao.MaCTDT }, chuongTrinhDaoTao);
+            return CreatedAtAction("GetChuongTrinhDaoTao", new { id = ctdt.MaCTDT }, ctdt);
         }
 
         // DELETE: api/ChuongTrinhDaoTaos/5

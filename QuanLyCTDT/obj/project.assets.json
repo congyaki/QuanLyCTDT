@@ -10713,9 +10713,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QuanLyCTDT\\QuanLyCTDT.csproj",
-      "projectName": "QuanLyCTDT",
-      "projectPath": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QuanLyCTDT\\QuanLyCTDT.csproj",
+      "projectUniqueName": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QuanLyCTDT\\QL_CTDT.AdminWeb.csproj",
+      "projectName": "QL_CTDT.AdminWeb",
+      "projectPath": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QuanLyCTDT\\QL_CTDT.AdminWeb.csproj",
       "packagesPath": "C:\\Users\\ADmin\\.nuget\\packages\\",
       "outputPath": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QuanLyCTDT\\obj\\",
       "projectStyle": "PackageReference",

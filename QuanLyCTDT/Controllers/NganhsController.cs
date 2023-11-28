@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -26,55 +27,31 @@ namespace QuanLyCTDT.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Nganh> nganhs = new List<Nganh>();
+            List<Nganh_VM> nganhs = new List<Nganh_VM>();
             HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Nganh/GetNganhs").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                nganhs = JsonConvert.DeserializeObject<List<Nganh>>(data);
+                nganhs = JsonConvert.DeserializeObject<List<Nganh_VM>>(data);
             }
             return View(nganhs);
         }
 
         // GET: NganhsController/Details/5
         [HttpGet("{id}")]
-        public IActionResult Details()
+        public IActionResult Details(string id)
         {
-            Nganh nganh = new Nganh();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Nganh/GetNganh").Result;
+            Nganh_VM nganh = new Nganh_VM();
+            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Nganh/GetNganh/" + id).Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                nganh = JsonConvert.DeserializeObject<Nganh>(data);
+                nganh = JsonConvert.DeserializeObject<Nganh_VM>(data);
             }
             return View(nganh);
         }
 
         // GET: Nganhs
-        /*public async Task<IActionResult> Index()
-        {
-            var trainingProgramDbContext = _context.Nganhs.Include(n => n.Khoa);
-            return View(await trainingProgramDbContext.ToListAsync());
-        }
-
-        // GET: Nganhs/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null || _context.Nganhs == null)
-            {
-                return NotFound();
-            }
-
-            var nganh = await _context.Nganhs
-                .Include(n => n.Khoa)
-                .FirstOrDefaultAsync(m => m.MaNganh == id);
-            if (nganh == null)
-            {
-                return NotFound();
-            }
-
-            return View(nganh);
-        }*/
 
         // GET: Nganhs/Create
         /*public IActionResult Create()
@@ -186,14 +163,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.Nganhs.Remove(nganh);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NganhExists(string id)
         {
-          return (_context.Nganhs?.Any(e => e.MaNganh == id)).GetValueOrDefault();
+            return (_context.Nganhs?.Any(e => e.MaNganh == id)).GetValueOrDefault();
         }*/
     }
 }

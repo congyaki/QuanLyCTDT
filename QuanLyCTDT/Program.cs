@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using QL_CTDT.Data.Models.EF;
 using QuanLyCTDT.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-/*var connectionString = builder.Configuration.GetConnectionString("TrainingProgramDB");
-builder.Services.AddDbContext<TrainingProgramDbContext>(options => options.UseSqlServer(connectionString));*/
+var connectionString = builder.Configuration.GetConnectionString("TrainingProgramDB");
+builder.Services.AddDbContext<TrainingProgramDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -28,16 +29,10 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action}/{id?}"
-    );
-    endpoints.MapControllerRoute(
-        name: "index",
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
-    
 });
 
 app.Run();

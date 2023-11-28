@@ -1,4 +1,4 @@
-﻿@model QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao
+﻿@model QL_CTDT.Data.Models.ViewModels.CTDT_VM
 
 @{
     ViewData["Title"] = "Create";
@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="MaCTDT" class="control-label"></label>
                 <input asp-for="MaCTDT" class="form-control" />
                 <span asp-validation-for="MaCTDT" class="text-danger"></span>
@@ -21,18 +21,18 @@
                 <label asp-for="Ten" class="control-label"></label>
                 <input asp-for="Ten" class="form-control" />
                 <span asp-validation-for="Ten" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="MaKhoa" class="control-label"></label>
-                <select asp-for="MaKhoa" class ="form-control" asp-items="ViewBag.MaKhoa"></select>
+                <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.MaKhoa"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MaKhoaHoc" class="control-label"></label>
-                <select asp-for="MaKhoaHoc" class ="form-control" asp-items="ViewBag.MaKhoaHoc"></select>
+                <select asp-for="MaKhoaHoc" class="form-control" asp-items="ViewBag.MaKhoaHoc"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MaNganh" class="control-label"></label>
-                <select asp-for="MaNganh" class ="form-control" asp-items="ViewBag.MaNganh"></select>
+                <select asp-for="MaNganh" class="form-control" asp-items="ViewBag.MaNganh"></select>
             </div>
             <div class="form-group">
                 <label asp-for="SoNamDaoTao" class="control-label"></label>
@@ -51,5 +51,9 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js" integrity="sha512-..." crossorigin="anonymous"></script>
 }

@@ -1,0 +1,205 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = QL_CTDT.WebClient
+build_property.RootNamespace = QL_CTDT.WebClient
+build_property.ProjectDir = D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.WebClient\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\WorkSpace\c_sharp\QuanLyCTDT\QL_CTDT.WebClient
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/ChuongTrinhDaoTaos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/ChuongTrinhDaoTaos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/ChuongTrinhDaoTaos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/ChuongTrinhDaoTaos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/ChuongTrinhDaoTaos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1b25nVHJpbmhEYW9UYW9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/CTDT_KKT/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/CTDT_KKT/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/CTDT_KKT/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/CTDT_KKT/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/CTDT_KKT/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ1REVF9LS1RcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/GanHocPhans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/GanHocPhans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/GanHocPhans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/GanHocPhans/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/GanHocPhans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FuSG9jUGhhbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/HocPhans/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/HocPhans/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/HocPhans/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/HocPhans/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/HocPhans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9jUGhhbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoaHocs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoaHocs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoaHocs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoaHocs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoaHocs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Khoas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Khoas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Khoas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Khoas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Khoas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoiKienThucs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoiKienThucs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoiKienThucs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoiKienThucs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/KhoiKienThucs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvaUtpZW5UaHVjc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Nganhs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Nganhs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Nganhs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Nganhs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Nganhs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmdhbmhzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpace/c_sharp/QuanLyCTDT/QL_CTDT.WebClient/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-n5cy8i698h

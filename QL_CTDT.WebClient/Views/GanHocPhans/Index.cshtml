@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.GanHocPhan>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HocPhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CTDT_KKT)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HocPhan.MaHocPhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CTDT_KKT.MaCTDT_KKT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

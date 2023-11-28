@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao>
+﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.CTDT_VM>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ten)
+                @Html.DisplayNameFor(model => model.TenCTDT)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SoNamDaoTao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Khoa)
+                @Html.DisplayNameFor(model => model.TenKhoa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KhoaHoc)
+                @Html.DisplayNameFor(model => model.TenKhoaHoc)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nganh)
+                @Html.DisplayNameFor(model => model.TenNganh)
             </th>
             <th></th>
         </tr>
@@ -34,23 +34,23 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Ten)
+                @Html.DisplayFor(modelItem => item.TenCTDT)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SoNamDaoTao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Khoa.MaKhoa)
+                @Html.DisplayFor(modelItem => item.TenKhoa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KhoaHoc.MaKhoaHoc)
+                @Html.DisplayFor(modelItem => item.TenKhoaHoc)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nganh.MaNganh)
+                @Html.DisplayFor(modelItem => item.TenNganh)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MaCTDT">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaCTDT">Details</a> |
+                <a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="@item.MaCTDT">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.MaCTDT">Delete</a>
             </td>
         </tr>
