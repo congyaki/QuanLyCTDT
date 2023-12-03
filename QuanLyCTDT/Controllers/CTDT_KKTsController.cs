@@ -8,46 +8,50 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
     public class CTDT_KKTsController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public CTDT_KKTsController()
+        public CTDT_KKTsController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
 
         // GET: CTDT_KKTsController
         [HttpGet]
-        public IActionResult Index()
+        [Route("Index")]
+        public async Task<IActionResult> Index()
         {
-            List<CTDT_KKT> ctdt_kkts = new List<CTDT_KKT>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/CTDT_KKT/GetCTDT_KKTs").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                ctdt_kkts = JsonConvert.DeserializeObject<List<CTDT_KKT>>(data);
-            }
-            return View(ctdt_kkts);
+            List<CTDT_KKT_VM> danhSachCTDT_KKT = await _context.CTDT_KKTs
+                  .Select(e => new CTDT_KKT_VM()
+                  {
+                      MaCTDT_KKT = e.MaCTDT_KKT,
+                      TenCTDT_KKT = e.TenCTDT_KKT,
+                      TenCTDT = e.ChuongTrinhDaoTao.Ten,
+                      TenKKT = e.KhoiKienThuc.Ten,
+                  }).ToListAsync();
+            return View(danhSachCTDT_KKT);
         }
 
         // GET: DanhMucCTDT_KKTs/Details/5
-        [HttpGet("{id}")]
-        public IActionResult Details()
+        [HttpGet]
+        [Route("Details/{id}")]
+        public async Task<IActionResult> Details(string id)
         {
-            CTDT_KKT ctdt_kkt = new CTDT_KKT();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/CTDT_KKT/GetCTDT_KKT").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                ctdt_kkt = JsonConvert.DeserializeObject<CTDT_KKT>(data);
-            }
-            return View(ctdt_kkt);
+            CTDT_KKT_VM ck = await _context.CTDT_KKTs
+                .Where(p => p.MaCTDT_KKT == id)
+                  .Select(e => new CTDT_KKT_VM
+                  {
+                      MaCTDT_KKT = e.MaCTDT_KKT,
+                      TenCTDT_KKT = e.TenCTDT_KKT,
+                      TenCTDT = e.ChuongTrinhDaoTao.Ten,
+                      TenKKT = e.KhoiKienThuc.Ten,
+                  }).FirstOrDefaultAsync();
+            return View(ck);
         }
 
         // GET: CTDT_KKTs/Create

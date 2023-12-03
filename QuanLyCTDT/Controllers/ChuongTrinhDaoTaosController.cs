@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
 using QL_CTDT.Data.Models.ViewModels;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -23,7 +25,7 @@ namespace QuanLyCTDT.Controllers
 
 
         [HttpGet]
-        [Route("Index")]
+        [Route("ChuongTrinhDaoTaos/Index")]
         public async Task<IActionResult> Index()
         {
             if (_context.ChuongTrinhDaoTaos == null)
@@ -91,12 +93,24 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: ChuongTrinhDaoTaos/Create
+        [HttpGet]
+        [Route("ChuongTrinhDaoTaos/Create")]
         public IActionResult Create()
         {
-            /*ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
-            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc");
-            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh");*/
-            return View();
+            var model = new ChiTietCTDT_VM();
+            model.CTDT_KKT_VM = new List<CTDT_KKT_VM>
+            {
+                new CTDT_KKT_VM
+                {
+                    HocPhans = new List<HocPhan_VM>()
+                }
+            };
+            ViewBag.Nganhs = new SelectList(_context.Nganhs, "MaNganh", "Ten");
+            ViewBag.KhoaHocs = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "Ten");
+            ViewBag.KhoiKienThucs = new SelectList(_context.KhoiKienThucs, "MaKKT", "Ten");
+            ViewBag.Khoas = new SelectList(_context.Khoas, "MaKhoa", "Ten");
+            ViewBag.HocPhans = new SelectList(_context.HocPhans, "MaKhoa", "Ten");
+            return View(model);
         }
 
         // POST: ChuongTrinhDaoTaos/Create
@@ -104,31 +118,67 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaCTDT,Ten,MaKhoa,MaKhoaHoc,MaNganh,SoNamDaoTao")] CTDT_VM ctdt_VM)
+        public async Task<IActionResult> Create(ChiTietCTDT_VM ctdt_VM)
         {
-            ctdt_VM.TenNganh = _context.Nganhs.FirstOrDefault(e => e.MaNganh == ctdt_VM.MaNganh)?.Ten;
-            ctdt_VM.TenKhoaHoc = _context.KhoaHocs.FirstOrDefault(e => e.MaKhoaHoc == ctdt_VM.MaKhoaHoc)?.Ten;
-
-            var ctdt = new ChuongTrinhDaoTao()
+            if (TryValidateModel(ctdt_VM))
             {
-                Ten = ctdt_VM.TenNganh + " - " + ctdt_VM.TenKhoaHoc,
-                MaKhoa = ctdt_VM.MaKhoa,
-                MaKhoaHoc = ctdt_VM.MaKhoaHoc,
-                MaNganh = ctdt_VM.MaNganh,
-                MaCTDT = ctdt_VM.MaNganh + " - " + ctdt_VM.MaKhoaHoc,
-                SoNamDaoTao = (float)ctdt_VM.SoNamDaoTao
-            };
+                var tenNganh = _context.Nganhs.FirstOrDefault(e => e.MaNganh == ctdt_VM.MaNganh)?.Ten;
+                var tenKhoaHoc = _context.KhoaHocs.FirstOrDefault(e => e.MaKhoaHoc == ctdt_VM.MaKhoaHoc)?.Ten;
 
-            if (!ModelState.IsValid)
-            {
-                _context.Add(ctdt);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var chuongTrinhDaoTao = new ChuongTrinhDaoTao()
+                {
+                    Ten = tenNganh + " - " + tenKhoaHoc,
+                    MaKhoa = ctdt_VM.MaKhoa,
+                    MaKhoaHoc = ctdt_VM.MaKhoaHoc,
+                    MaNganh = ctdt_VM.MaNganh,
+                    MaCTDT = ctdt_VM.MaNganh + " - " + ctdt_VM.MaKhoaHoc,
+                    SoNamDaoTao = (float)ctdt_VM.SoNamDaoTao
+                };
+            
+                    _context.ChuongTrinhDaoTaos.Add(chuongTrinhDaoTao);
+                        await _context.SaveChangesAsync();
+                // Thêm các CTDT_KKT và HocPhan tương ứng vào cơ sở dữ liệu
+                foreach (var ctdt_kkt_vm in ctdt_VM.CTDT_KKT_VM)
+                {
+                    var tenKKT = _context.KhoiKienThucs.FirstOrDefault(e => e.MaKKT == ctdt_kkt_vm.MaKKT)?.Ten;
+
+                    var ctdt_kkt = new CTDT_KKT
+                    {
+                        MaCTDT = chuongTrinhDaoTao.MaCTDT,
+                        MaKKT = ctdt_kkt_vm.MaKKT,
+                        MaCTDT_KKT = chuongTrinhDaoTao.MaCTDT + " - " + ctdt_kkt_vm.MaKKT,
+                        TenCTDT_KKT = chuongTrinhDaoTao.Ten + " - " + tenKKT,
+                        // Gán các giá trị khác tương ứng
+                    };
+
+                    // Thêm ctdt_kkt vào context và lưu vào cơ sở dữ liệu
+                    _context.CTDT_KKTs.Add(ctdt_kkt);
+                    _context.SaveChanges();
+
+                    // Thêm các HocPhan tương ứng vào ctdt_kkt
+                    foreach (var hocPhan_vm in ctdt_kkt_vm.HocPhans)
+                    {
+                        var hocPhan = new HocPhan
+                        {
+                            MaHocPhan = hocPhan_vm.MaHocPhan,
+                            Ten = hocPhan_vm.Ten,
+                            MoTa = hocPhan_vm.MoTa,
+                            SoTinChi = (int)hocPhan_vm.SoTinChi,
+                            MaKhoa = hocPhan_vm.MaKhoa,
+                            // Gán các giá trị khác tương ứng
+                        };
+
+                        // Thêm hocPhan vào context và lưu vào cơ sở dữ liệu
+                        _context.HocPhans.Add(hocPhan);
+                        _context.SaveChanges();
+                    }
+                }
+                // Chuyển hướng đến action thêm CTDT_KKT_VM và truyền id của CTDT
+                return RedirectToAction("Details", new { id = chuongTrinhDaoTao.MaCTDT });
             }
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", ctdt.MaKhoa);
-            ViewData["MaKhoaHoc"] = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "MaKhoaHoc", ctdt.MaKhoaHoc);
-            ViewData["MaNganh"] = new SelectList(_context.Nganhs, "MaNganh", "MaNganh", ctdt.MaNganh);
-            return View(ctdt);
+
+
+            return View(ctdt_VM);
         }
 
         // GET: ChuongTrinhDaoTaos/Edit/5
