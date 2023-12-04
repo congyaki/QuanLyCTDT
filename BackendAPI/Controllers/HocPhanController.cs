@@ -88,7 +88,7 @@ namespace QL_CTDT.BackendAPI.Controllers
 
             _hocPhan.Ten = hocPhan.Ten;
             _hocPhan.MoTa = hocPhan.MoTa;
-            _hocPhan.SoTinChi = hocPhan.SoTinChi;
+            _hocPhan.SoTinChi = (int)hocPhan.SoTinChi;
             _hocPhan.MaKhoa = hocPhan.MaKhoa;
 
             _context.Entry(_hocPhan).State = EntityState.Modified;
@@ -127,7 +127,7 @@ namespace QL_CTDT.BackendAPI.Controllers
                 MaHocPhan = hocPhan.MaHocPhan,
                 Ten = hocPhan.Ten,
                 MoTa = hocPhan.MoTa,
-                SoTinChi = hocPhan.SoTinChi,
+                SoTinChi = (int)hocPhan.SoTinChi,
                 MaKhoa = hocPhan.MaKhoa,
             };
 

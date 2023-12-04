@@ -24,28 +24,53 @@ namespace QuanLyCTDT.Controllers
         // GET: KhoaHocsController
         [HttpGet]
         [Route("Nganhs/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+            if (_context.Nganhs == null)
+            {
+                return NotFound();
+            }
+            var danhSachNganhVM = await _context.Nganhs
+                .Select(nganh => new Nganh_VM
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                    TenKhoa = nganh.Khoa.Ten
+                })
+                .ToListAsync();
+            return View(danhSachNganhVM);
         }
 
         // GET: NganhsController/Details/5
         [HttpGet("{id}")]
         [Route("Nganhs/Details/{id}")]
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            
-            return View();
+            if (_context.Nganhs == null)
+            {
+                return NotFound();
+            }
+            var nganh = await _context.Nganhs
+                .Where(p => p.MaNganh == id)
+                .Select(nganh => new Nganh_VM
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                    TenKhoa = nganh.Khoa.Ten
+                }).FirstOrDefaultAsync();
+            return View(nganh);
         }
 
-        // GET: Nganhs
-
         // GET: Nganhs/Create
+        [HttpGet]
         [Route("Nganhs/Create")]
         public IActionResult Create()
         {
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "Ten");
             return View();
         }
 
@@ -55,19 +80,31 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Nganhs/Create")]
-        public async Task<IActionResult> Create([Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
+        public async Task<IActionResult> Create([Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh_VM nganh)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(nganh);
+                if (_context.Nganhs == null)
+                {
+                    return Problem("Entity set 'TrainingProgramDbContext.Nganhs'  is null.");
+                }
+                var _nganh = new Nganh
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                };
+                _context.Add(_nganh);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", nganh.MaKhoa);
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "Ten", nganh.MaKhoa);
             return View(nganh);
         }
 
         // GET: Nganhs/Edit/5
+        [HttpGet]
         [Route("Nganhs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -91,18 +128,25 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Nganhs/Edit/{id}")]
-        public async Task<IActionResult> Edit(string id, [Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
+        public async Task<IActionResult> Edit(string id, [Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh_VM nganh)
         {
-            if (id != nganh.MaNganh)
+            var _nganh = _context.Nganhs.FirstOrDefault(p => p.MaNganh == id);
+
+            if (id != _nganh.MaNganh)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+
+                
+                _nganh.Ten = nganh.Ten;
+                _nganh.MoTa = nganh.MoTa;
+                _nganh.MaKhoa = nganh.MaKhoa;
                 try
                 {
-                    _context.Update(nganh);
+                    _context.Update(_nganh);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

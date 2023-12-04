@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.HocPhan>
+﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.HocPhan_VM>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.SoTinChi)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Khoa)
+                @Html.DisplayNameFor(model => model.TenKhoa)
             </th>
             <th></th>
         </tr>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.SoTinChi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Khoa.MaKhoa)
+                @Html.DisplayFor(modelItem => item.TenKhoa)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MaHocPhan">Edit</a> |

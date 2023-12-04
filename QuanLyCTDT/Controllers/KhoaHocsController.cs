@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -22,20 +23,34 @@ namespace QuanLyCTDT.Controllers
         // GET: KhoaHocsController
         [HttpGet]
         [Route("KhoaHocs/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+            if (_context.KhoaHocs == null)
+            {
+                return NotFound();
+            }
+            var khoaHoc = await _context.KhoaHocs.ToListAsync();
+            return View(khoaHoc);
         }
 
         // GET: KhoaHocsController/Details/5
         [HttpGet("{id}")]
         [Route("KhoaHocs/Details/{id}")]
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(string id)
         {
-            
-            return View();
+            if (_context.KhoaHocs == null)
+            {
+                return NotFound();
+            }
+            var khoaHoc = await _context.KhoaHocs.FirstOrDefaultAsync(p => p.MaKhoaHoc == id);
+
+            if (khoaHoc == null)
+            {
+                return NotFound();
+            }
+
+            return View(khoaHoc);
         }
 
         // GET: KhoaHocs/Create
@@ -52,11 +67,20 @@ namespace QuanLyCTDT.Controllers
         [ValidateAntiForgeryToken]
         [Route("KhoaHocs/Create")]
 
-        public async Task<IActionResult> Create([Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc khoaHoc)
+        public async Task<IActionResult> Create([Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc_VM khoaHoc)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(khoaHoc);
+                var _khoaHoc = new KhoaHoc
+                {
+                    MaKhoaHoc = khoaHoc.MaKhoaHoc,
+                    Ten = khoaHoc.Ten,
+                    MoTa = khoaHoc.MoTa,
+                    NgayBatDau = khoaHoc.NgayBatDau,
+                    NgayKetThuc = khoaHoc.NgayKetThuc,
+                };
+
+                _context.Add(_khoaHoc);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -64,6 +88,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: KhoaHocs/Edit/5
+        [HttpGet]
         [Route("KhoaHocs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -86,7 +111,7 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("KhoaHocs/Edit/{id}")]
-        public async Task<IActionResult> Edit(string id, [Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc khoaHoc)
+        public async Task<IActionResult> Edit(string id, [Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc_VM khoaHoc)
         {
             if (id != khoaHoc.MaKhoaHoc)
             {
@@ -95,9 +120,18 @@ namespace QuanLyCTDT.Controllers
 
             if (ModelState.IsValid)
             {
+                var _khoaHoc = _context.KhoaHocs.FirstOrDefault(p => p.MaKhoaHoc == id);
+                if (id != _khoaHoc.MaKhoaHoc)
+                {
+                    return BadRequest();
+                }
+                _khoaHoc.Ten = khoaHoc.Ten;
+                _khoaHoc.MoTa = khoaHoc.MoTa;
+                _khoaHoc.NgayBatDau = khoaHoc.NgayBatDau;
+                _khoaHoc.NgayKetThuc = khoaHoc.NgayKetThuc;
                 try
                 {
-                    _context.Update(khoaHoc);
+                    _context.Update(_khoaHoc);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

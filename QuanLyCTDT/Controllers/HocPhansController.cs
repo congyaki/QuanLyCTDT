@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -22,27 +23,64 @@ namespace QuanLyCTDT.Controllers
         // GET: KhoaHocsController
         [HttpGet]
         [Route("HocPhans/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            if (_context.HocPhans == null)
+            {
+                return NotFound();
+            }
+
+            var model = await(from hp in _context.HocPhans
+                        join k in _context.Khoas
+                        on hp.MaKhoa equals k.MaKhoa
+                        select new HocPhan_VM()
+                        {
+                            MaHocPhan = hp.MaHocPhan,
+                            Ten = hp.Ten,
+                            SoTinChi = hp.SoTinChi,
+                            MoTa = hp.MoTa,
+                            TenKhoa = k.Ten,
+                        }).ToListAsync();
+            return View(model);
         }
 
         // GET: HocPhansController/Details/5
         [HttpGet("{id}")]
         [Route("HocPhans/Details/{id}")]
 
-        public IActionResult Details()
+        public IActionResult Details(string id)
         {
-            
-            return View();
+            if (_context.HocPhans == null)
+            {
+                return NotFound();
+            }
+            var model = (from hp in _context.HocPhans
+                        join k in _context.Khoas
+                        on hp.MaKhoa equals k.MaKhoa
+                        where hp.MaHocPhan == id
+                        select new HocPhan_VM()
+                        {
+                            MaHocPhan = hp.MaHocPhan,
+                            Ten = hp.Ten,
+                            SoTinChi = hp.SoTinChi,
+                            MoTa = hp.MoTa,
+                            TenKhoa = k.Ten,
+                        }).FirstOrDefault();
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
         }
 
         // GET: HocPhans/Create
+        [HttpGet]
         [Route("HocPhans/Create")]
 
         public IActionResult Create()
         {
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "Ten");
             return View();
         }
 
@@ -53,21 +91,29 @@ namespace QuanLyCTDT.Controllers
         [ValidateAntiForgeryToken]
         [Route("HocPhans/Create")]
 
-        public async Task<IActionResult> Create([Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
+        public async Task<IActionResult> Create([Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan_VM hocPhan)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hocPhan);
+                var _hocPhan = new HocPhan
+                {
+                    MaHocPhan = hocPhan.MaHocPhan,
+                    Ten = hocPhan.Ten,
+                    MoTa = hocPhan.MoTa,
+                    SoTinChi = (int)hocPhan.SoTinChi,
+                    MaKhoa = hocPhan.MaKhoa,
+                };
+                _context.Add(_hocPhan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", hocPhan.MaKhoa);
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "Ten", hocPhan.MaKhoa);
             return View(hocPhan);
         }
 
         // GET: HocPhans/Edit/5
+        [HttpGet]
         [Route("HocPhans/Edit/{id}")]
-
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.HocPhans == null)
@@ -80,7 +126,7 @@ namespace QuanLyCTDT.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa", hocPhan.MaKhoa);
+            ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "Ten", hocPhan.MaKhoa);
             return View(hocPhan);
         }
 
@@ -91,7 +137,7 @@ namespace QuanLyCTDT.Controllers
         [ValidateAntiForgeryToken]
         [Route("HocPhans/Edit/{id}")]
 
-        public async Task<IActionResult> Edit(string id, [Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
+        public async Task<IActionResult> Edit(string id, [Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan_VM hocPhan)
         {
             if (id != hocPhan.MaHocPhan)
             {
@@ -100,9 +146,20 @@ namespace QuanLyCTDT.Controllers
 
             if (ModelState.IsValid)
             {
+                var _hocPhan = _context.HocPhans.FirstOrDefault(p => p.MaHocPhan == id);
+
+                if (id != _hocPhan.MaHocPhan)
+                {
+                    return BadRequest();
+                }
+
+                _hocPhan.Ten = hocPhan.Ten;
+                _hocPhan.MoTa = hocPhan.MoTa;
+                _hocPhan.SoTinChi = (int)hocPhan.SoTinChi;
+                _hocPhan.MaKhoa = hocPhan.MaKhoa;
                 try
                 {
-                    _context.Update(hocPhan);
+                    _context.Update(_hocPhan);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

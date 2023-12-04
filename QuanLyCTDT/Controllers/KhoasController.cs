@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -22,19 +23,39 @@ namespace QuanLyCTDT.Controllers
         // GET: KhoaHocsController
         [HttpGet]
         [Route("Khoas/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+            if (_context.Khoas == null)
+            {
+                return NotFound();
+            }
+            var khoa = await _context.Khoas.ToListAsync();
+            return View(khoa);
         }
 
         // GET: KhoasController/Details/5
         [HttpGet("{id}")]
         [Route("Khoas/Details/{id}")]
-        public IActionResult Details()
+        public async Task<IActionResult> Details(string id)
         {
-            
-            return View();
+            if (_context.Khoas == null)
+            {
+                return NotFound();
+            }
+            var hocPhans = await (from hp in _context.HocPhans
+                                  where hp.MaKhoa == id
+                                  select hp).ToListAsync();
+
+            var khoa = await (from k in _context.Khoas
+                              where k.MaKhoa == id
+                              select new Khoa()
+                              {
+                                  MaKhoa = k.MaKhoa,
+                                  Ten = k.Ten,
+                                  MoTa = k.MoTa,
+                                  HocPhans = hocPhans
+                              }).FirstOrDefaultAsync();
+            return View(khoa);
         }
 
         // GET: Khoas/Create
@@ -52,11 +73,17 @@ namespace QuanLyCTDT.Controllers
         [ValidateAntiForgeryToken]
         [Route("Khoas/Create")]
 
-        public async Task<IActionResult> Create([Bind("MaKhoa,Ten,MoTa")] Khoa khoa)
+        public async Task<IActionResult> Create([Bind("MaKhoa,Ten,MoTa")] Khoa_VM khoa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(khoa);
+                var _khoa = new Khoa
+                {
+                    MaKhoa = khoa.MaKhoa,
+                    Ten = khoa.Ten,
+                    MoTa = khoa.MoTa,
+                };
+                _context.Add(_khoa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -64,6 +91,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: Khoas/Edit/5
+        [HttpGet]
         [Route("Khoas/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -86,18 +114,26 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Khoas/Edit/{id}")]
-        public async Task<IActionResult> Edit(string id, [Bind("MaKhoa,Ten,MoTa")] Khoa khoa)
+        public async Task<IActionResult> Edit(string id, [Bind("MaKhoa,Ten,MoTa")] Khoa_VM khoa)
         {
             if (id != khoa.MaKhoa)
             {
                 return NotFound();
             }
+            var _khoa = _context.Khoas.FirstOrDefault(p => p.MaKhoa == id);
 
             if (ModelState.IsValid)
             {
+                if (id != _khoa.MaKhoa)
+                {
+                    return BadRequest();
+                }
+
+                _khoa.Ten = khoa.Ten;
+                _khoa.MoTa = khoa.MoTa;
                 try
                 {
-                    _context.Update(khoa);
+                    _context.Update(_khoa);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

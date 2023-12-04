@@ -29,9 +29,9 @@ namespace QL_CTDT.BackendAPI.Controllers
         {
 
             if (_context.Nganhs == null)
-          {
-              return NotFound();
-          }
+            {
+                return NotFound();
+            }
             List<Nganh_VM> danhSachNganhVM = await _context.Nganhs
                 .Select(nganh => new Nganh_VM
                 {

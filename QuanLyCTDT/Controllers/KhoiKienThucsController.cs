@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QuanLyCTDT.Controllers
 {
@@ -22,22 +23,36 @@ namespace QuanLyCTDT.Controllers
         // GET: KhoaHocsController
         [HttpGet]
         [Route("KhoiKienThucs/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+            if (_context.KhoiKienThucs == null)
+            {
+                return NotFound();
+            }
+            var kkt = await _context.KhoiKienThucs.ToListAsync();
+            return View(kkt);
         }
 
         // GET: KhoiKienThucsController/Details/5
         [HttpGet("{id}")]
         [Route("KhoiKienThucs/Details/{id}")]
-        public IActionResult Details()
+        public async Task<IActionResult> Details(string id)
         {
-            
-            return View();
+            if (_context.KhoiKienThucs == null)
+            {
+                return NotFound();
+            }
+            var khoiKienThuc = await _context.KhoiKienThucs.FirstOrDefaultAsync(e => e.MaKKT == id);
+
+            if (khoiKienThuc == null)
+            {
+                return NotFound();
+            }
+            return View(khoiKienThuc);
         }
 
         // GET: KhoiKienThucs/Create
+        [HttpGet]
         [Route("KhoiKienThucs/Create")]
         public IActionResult Create()
         {
@@ -50,18 +65,30 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("KhoiKienThucs/Create")]
-        public async Task<IActionResult> Create([Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
+        public async Task<IActionResult> Create([Bind("MaKKT,Ten,MoTa")] KhoiKienThuc_VM kKT)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(khoiKienThuc);
+                if (_context.KhoiKienThucs == null)
+                {
+                    return Problem("Entity set 'TrainingProgramDbContext.KhoiKienThucs'  is null.");
+                }
+
+                var _kKT = new KhoiKienThuc
+                {
+                    MaKKT = kKT.MaKKT,
+                    Ten = kKT.Ten,
+                    MoTa = kKT.MoTa,
+                };
+                _context.Add(_kKT);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(khoiKienThuc);
+            return View(kKT);
         }
 
         // GET: KhoiKienThucs/Edit/5
+        [HttpGet]
         [Route("KhoiKienThucs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
@@ -84,23 +111,26 @@ namespace QuanLyCTDT.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("KhoiKienThucs/Edit/{id}")]
-        public async Task<IActionResult> Edit(string id, [Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
+        public async Task<IActionResult> Edit(string id, [Bind("MaKKT,Ten,MoTa")] KhoiKienThuc_VM kKT)
         {
-            if (id != khoiKienThuc.MaKKT)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
+                var _kKT = _context.KhoiKienThucs.FirstOrDefault(p => p.MaKKT == id);
+                if (id != _kKT.MaKKT)
+                {
+                    return NotFound();
+                }
+                _kKT.Ten = kKT.Ten;
+                _kKT.MoTa = kKT.MoTa;
                 try
                 {
-                    _context.Update(khoiKienThuc);
+                    _context.Update(_kKT);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!KhoiKienThucExists(khoiKienThuc.MaKKT))
+                    if (!KhoiKienThucExists(kKT.MaKKT))
                     {
                         return NotFound();
                     }
@@ -111,7 +141,7 @@ namespace QuanLyCTDT.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(khoiKienThuc);
+            return View(kKT);
         }
 
         // GET: KhoiKienThucs/Delete/5
