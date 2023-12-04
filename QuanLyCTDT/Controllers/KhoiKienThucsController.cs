@@ -13,44 +13,33 @@ namespace QuanLyCTDT.Controllers
 {
     public class KhoiKienThucsController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public KhoiKienThucsController()
+        public KhoiKienThucsController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("KhoiKienThucs/Index")]
         public IActionResult Index()
         {
-            List<KhoiKienThuc> khoiKienThucs = new List<KhoiKienThuc>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoiKienThuc/GetKhoiKienThucs").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoiKienThucs = JsonConvert.DeserializeObject<List<KhoiKienThuc>>(data);
-            }
-            return View(khoiKienThucs);
+            
+            return View();
         }
 
         // GET: KhoiKienThucsController/Details/5
         [HttpGet("{id}")]
+        [Route("KhoiKienThucs/Details/{id}")]
         public IActionResult Details()
         {
-            KhoiKienThuc khoiKienThuc = new KhoiKienThuc();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoiKienThuc/GetKhoiKienThuc").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoiKienThuc = JsonConvert.DeserializeObject<KhoiKienThuc>(data);
-            }
-            return View(khoiKienThuc);
+            
+            return View();
         }
 
         // GET: KhoiKienThucs/Create
-        /*public IActionResult Create()
+        [Route("KhoiKienThucs/Create")]
+        public IActionResult Create()
         {
             return View();
         }
@@ -60,6 +49,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("KhoiKienThucs/Create")]
         public async Task<IActionResult> Create([Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
         {
             if (ModelState.IsValid)
@@ -72,6 +62,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: KhoiKienThucs/Edit/5
+        [Route("KhoiKienThucs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.KhoiKienThucs == null)
@@ -92,6 +83,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("KhoiKienThucs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id, [Bind("MaKKT,Ten,MoTa")] KhoiKienThuc khoiKienThuc)
         {
             if (id != khoiKienThuc.MaKKT)
@@ -123,6 +115,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: KhoiKienThucs/Delete/5
+        [Route("KhoiKienThucs/Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.KhoiKienThucs == null)
@@ -143,6 +136,7 @@ namespace QuanLyCTDT.Controllers
         // POST: KhoiKienThucs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("KhoiKienThucs/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.KhoiKienThucs == null)
@@ -154,14 +148,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.KhoiKienThucs.Remove(khoiKienThuc);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool KhoiKienThucExists(string id)
         {
-          return (_context.KhoiKienThucs?.Any(e => e.MaKKT == id)).GetValueOrDefault();
-        }*/
+            return (_context.KhoiKienThucs?.Any(e => e.MaKKT == id)).GetValueOrDefault();
+        }
     }
 }

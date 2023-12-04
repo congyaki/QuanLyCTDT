@@ -14,47 +14,36 @@ namespace QuanLyCTDT.Controllers
 {
     public class NganhsController : Controller
     {
-       
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
 
-        public NganhsController()
+        private readonly TrainingProgramDbContext _context;
+
+        public NganhsController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("Nganhs/Index")]
         public IActionResult Index()
         {
-            List<Nganh_VM> nganhs = new List<Nganh_VM>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Nganh/GetNganhs").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                nganhs = JsonConvert.DeserializeObject<List<Nganh_VM>>(data);
-            }
-            return View(nganhs);
+            
+            return View();
         }
 
         // GET: NganhsController/Details/5
         [HttpGet("{id}")]
+        [Route("Nganhs/Details/{id}")]
         public IActionResult Details(string id)
         {
-            Nganh_VM nganh = new Nganh_VM();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Nganh/GetNganh/" + id).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                nganh = JsonConvert.DeserializeObject<Nganh_VM>(data);
-            }
-            return View(nganh);
+            
+            return View();
         }
 
         // GET: Nganhs
 
         // GET: Nganhs/Create
-        /*public IActionResult Create()
+        [Route("Nganhs/Create")]
+        public IActionResult Create()
         {
             ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
             return View();
@@ -65,6 +54,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Nganhs/Create")]
         public async Task<IActionResult> Create([Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
         {
             if (ModelState.IsValid)
@@ -78,6 +68,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: Nganhs/Edit/5
+        [Route("Nganhs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Nganhs == null)
@@ -99,6 +90,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Nganhs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id, [Bind("MaNganh,Ten,MoTa,MaKhoa")] Nganh nganh)
         {
             if (id != nganh.MaNganh)
@@ -131,6 +123,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: Nganhs/Delete/5
+        [Route("Nganhs/Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Nganhs == null)
@@ -152,6 +145,7 @@ namespace QuanLyCTDT.Controllers
         // POST: Nganhs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Nganhs/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Nganhs == null)
@@ -171,6 +165,6 @@ namespace QuanLyCTDT.Controllers
         private bool NganhExists(string id)
         {
             return (_context.Nganhs?.Any(e => e.MaNganh == id)).GetValueOrDefault();
-        }*/
+        }
     }
 }

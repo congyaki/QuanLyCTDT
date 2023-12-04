@@ -91,10 +91,10 @@ namespace QL_CTDT.Data.Models.EF
                 entity.HasKey(h => h.MaCTDT_KKT);
                 entity.HasOne(d => d.ChuongTrinhDaoTao)
                         .WithMany(d => d.CTDT_KKTs)
-                        .HasForeignKey(h => h.MaCTDT);
+                        .HasForeignKey(h => h.MaCTDT).OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(d => d.KhoiKienThuc)
                         .WithMany(d => d.CTDT_KKTs)
-                        .HasForeignKey(h => h.MaKKT);
+                        .HasForeignKey(h => h.MaKKT).OnDelete(DeleteBehavior.Cascade);
 
             });
             modelBuilder.Entity<GanHocPhan>(entity =>
@@ -103,11 +103,11 @@ namespace QL_CTDT.Data.Models.EF
 
                 entity.HasOne(d => d.CTDT_KKT)
                     .WithMany(kh => kh.GanHocPhans)
-                    .HasForeignKey(d => d.MaCTDT_KKT).OnDelete(DeleteBehavior.NoAction);
+                    .HasForeignKey(d => d.MaCTDT_KKT).OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.HocPhan)
                     .WithMany(kh => kh.GanHocPhans)
-                    .HasForeignKey(d => d.MaHocPhan).OnDelete(DeleteBehavior.NoAction);
+                    .HasForeignKey(d => d.MaHocPhan).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<ChuongTrinhDaoTao>(entity =>
@@ -115,13 +115,13 @@ namespace QL_CTDT.Data.Models.EF
                 entity.HasKey(h => h.MaCTDT);
                 entity.HasOne(h => h.Khoa)
                     .WithMany(kh => kh.ChuongTrinhDaoTaos)
-                    .HasForeignKey(h => h.MaKhoa).OnDelete(DeleteBehavior.NoAction);
+                    .HasForeignKey(h => h.MaKhoa).OnDelete(DeleteBehavior.Cascade);
                 entity.HasOne(h => h.KhoaHoc)
                     .WithMany(kh => kh.ChuongTrinhDaoTaos)
                     .HasForeignKey(h => h.MaKhoaHoc);
                 entity.HasOne(h => h.Nganh)
                     .WithMany(kh => kh.ChuongTrinhDaoTaos)
-                    .HasForeignKey(h => h.MaNganh);
+                    .HasForeignKey(h => h.MaNganh).OnDelete(DeleteBehavior.Cascade);
             });
 
             // Tạo dữ liệu cho bảng Khoa

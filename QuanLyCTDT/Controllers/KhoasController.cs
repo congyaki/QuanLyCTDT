@@ -13,44 +13,34 @@ namespace QuanLyCTDT.Controllers
 {
     public class KhoasController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public KhoasController()
+        public KhoasController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("Khoas/Index")]
         public IActionResult Index()
         {
-            List<Khoa> khoas = new List<Khoa>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Khoa/GetKhoas").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoas = JsonConvert.DeserializeObject<List<Khoa>>(data);
-            }
-            return View(khoas);
+            
+            return View();
         }
 
         // GET: KhoasController/Details/5
         [HttpGet("{id}")]
+        [Route("Khoas/Details/{id}")]
         public IActionResult Details()
         {
-            Khoa khoa = new Khoa();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/Khoa/GetKhoa").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoa = JsonConvert.DeserializeObject<Khoa>(data);
-            }
-            return View(khoa);
+            
+            return View();
         }
 
         // GET: Khoas/Create
-        /*public IActionResult Create()
+        [Route("Khoas/Create")]
+
+        public IActionResult Create()
         {
             return View();
         }
@@ -60,6 +50,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Khoas/Create")]
+
         public async Task<IActionResult> Create([Bind("MaKhoa,Ten,MoTa")] Khoa khoa)
         {
             if (ModelState.IsValid)
@@ -72,6 +64,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: Khoas/Edit/5
+        [Route("Khoas/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Khoas == null)
@@ -92,6 +85,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Khoas/Edit/{id}")]
         public async Task<IActionResult> Edit(string id, [Bind("MaKhoa,Ten,MoTa")] Khoa khoa)
         {
             if (id != khoa.MaKhoa)
@@ -123,6 +117,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: Khoas/Delete/5
+        [Route("Khoas/Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Khoas == null)
@@ -143,6 +138,7 @@ namespace QuanLyCTDT.Controllers
         // POST: Khoas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Khoas/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Khoas == null)
@@ -154,14 +150,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.Khoas.Remove(khoa);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool KhoaExists(string id)
         {
-          return (_context.Khoas?.Any(e => e.MaKhoa == id)).GetValueOrDefault();
-        }*/
+            return (_context.Khoas?.Any(e => e.MaKhoa == id)).GetValueOrDefault();
+        }
     }
 }

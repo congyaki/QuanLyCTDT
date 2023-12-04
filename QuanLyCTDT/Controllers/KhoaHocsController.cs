@@ -13,44 +13,34 @@ namespace QuanLyCTDT.Controllers
 {
     public class KhoaHocsController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public KhoaHocsController()
+        public KhoaHocsController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("KhoaHocs/Index")]
         public IActionResult Index()
         {
-            List<KhoaHoc> khoaHocs = new List<KhoaHoc>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoaHoc/GetKhoaHocs").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoaHocs = JsonConvert.DeserializeObject<List<KhoaHoc>>(data);
-            }
-            return View(khoaHocs);
+            
+            return View();
         }
 
         // GET: KhoaHocsController/Details/5
         [HttpGet("{id}")]
+        [Route("KhoaHocs/Details/{id}")]
+
         public IActionResult Details()
         {
-            KhoaHoc khoaHoc = new KhoaHoc();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/KhoaHoc/GetKhoaHoc").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                khoaHoc = JsonConvert.DeserializeObject<KhoaHoc>(data);
-            }
-            return View(khoaHoc);
+            
+            return View();
         }
 
         // GET: KhoaHocs/Create
-        /*public IActionResult Create()
+        [Route("KhoaHocs/Create")]
+        public IActionResult Create()
         {
             return View();
         }
@@ -60,6 +50,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("KhoaHocs/Create")]
+
         public async Task<IActionResult> Create([Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc khoaHoc)
         {
             if (ModelState.IsValid)
@@ -72,6 +64,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: KhoaHocs/Edit/5
+        [Route("KhoaHocs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.KhoaHocs == null)
@@ -92,6 +85,7 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("KhoaHocs/Edit/{id}")]
         public async Task<IActionResult> Edit(string id, [Bind("MaKhoaHoc,Ten,MoTa,NgayBatDau,NgayKetThuc")] KhoaHoc khoaHoc)
         {
             if (id != khoaHoc.MaKhoaHoc)
@@ -123,6 +117,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: KhoaHocs/Delete/5
+        [Route("KhoaHocs/Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.KhoaHocs == null)
@@ -143,6 +138,7 @@ namespace QuanLyCTDT.Controllers
         // POST: KhoaHocs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("KhoaHocs/Delete/{id}")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.KhoaHocs == null)
@@ -154,14 +150,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.KhoaHocs.Remove(khoaHoc);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool KhoaHocExists(string id)
         {
-          return (_context.KhoaHocs?.Any(e => e.MaKhoaHoc == id)).GetValueOrDefault();
-        }*/
+            return (_context.KhoaHocs?.Any(e => e.MaKhoaHoc == id)).GetValueOrDefault();
+        }
     }
 }

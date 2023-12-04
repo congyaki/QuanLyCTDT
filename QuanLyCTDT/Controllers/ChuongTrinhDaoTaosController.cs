@@ -52,7 +52,7 @@ namespace QuanLyCTDT.Controllers
         }
 
         [HttpGet]
-        [Route("Details/{id}")]
+        [Route("ChuongTrinhDaoTaos/Details/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (_context.ChuongTrinhDaoTaos == null)
@@ -68,6 +68,7 @@ namespace QuanLyCTDT.Controllers
                 CTDT_KKT_VM = ctdt.CTDT_KKTs
                     .Select(ctdt_kkt => new CTDT_KKT_VM
                     {
+                        MaCTDT_KKT = ctdt_kkt.MaCTDT_KKT,
                         TenKKT = ctdt_kkt.KhoiKienThuc.Ten,
                         TongSoHocPhan = ctdt_kkt.GanHocPhans.Count,
                         HocPhans = ctdt_kkt.GanHocPhans
@@ -97,20 +98,13 @@ namespace QuanLyCTDT.Controllers
         [Route("ChuongTrinhDaoTaos/Create")]
         public IActionResult Create()
         {
-            var model = new ChiTietCTDT_VM();
-            model.CTDT_KKT_VM = new List<CTDT_KKT_VM>
-            {
-                new CTDT_KKT_VM
-                {
-                    HocPhans = new List<HocPhan_VM>()
-                }
-            };
+            
             ViewBag.Nganhs = new SelectList(_context.Nganhs, "MaNganh", "Ten");
             ViewBag.KhoaHocs = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "Ten");
-            ViewBag.KhoiKienThucs = new SelectList(_context.KhoiKienThucs, "MaKKT", "Ten");
             ViewBag.Khoas = new SelectList(_context.Khoas, "MaKhoa", "Ten");
-            ViewBag.HocPhans = new SelectList(_context.HocPhans, "MaKhoa", "Ten");
-            return View(model);
+            ViewBag.KKTs = new SelectList(_context.KhoiKienThucs, "MaKKT", "Ten");
+
+            return View();
         }
 
         // POST: ChuongTrinhDaoTaos/Create
@@ -118,7 +112,9 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ChiTietCTDT_VM ctdt_VM)
+        [Route("ChuongTrinhDaoTaos/Create")]
+
+        public async Task<IActionResult> Create(Create_CTDT_VM ctdt_VM, string[] MaKKT)
         {
             if (TryValidateModel(ctdt_VM))
             {
@@ -137,51 +133,42 @@ namespace QuanLyCTDT.Controllers
             
                     _context.ChuongTrinhDaoTaos.Add(chuongTrinhDaoTao);
                         await _context.SaveChangesAsync();
-                // Thêm các CTDT_KKT và HocPhan tương ứng vào cơ sở dữ liệu
-                foreach (var ctdt_kkt_vm in ctdt_VM.CTDT_KKT_VM)
+                // Xử lý các giá trị MaKKT đã chọn
+                if (MaKKT != null)
                 {
-                    var tenKKT = _context.KhoiKienThucs.FirstOrDefault(e => e.MaKKT == ctdt_kkt_vm.MaKKT)?.Ten;
-
-                    var ctdt_kkt = new CTDT_KKT
+                    foreach (var maKKT in MaKKT)
                     {
-                        MaCTDT = chuongTrinhDaoTao.MaCTDT,
-                        MaKKT = ctdt_kkt_vm.MaKKT,
-                        MaCTDT_KKT = chuongTrinhDaoTao.MaCTDT + " - " + ctdt_kkt_vm.MaKKT,
-                        TenCTDT_KKT = chuongTrinhDaoTao.Ten + " - " + tenKKT,
-                        // Gán các giá trị khác tương ứng
-                    };
+                        var tenKKT = _context.KhoiKienThucs.FirstOrDefault(e => e.MaKKT == maKKT)?.Ten;
 
-                    // Thêm ctdt_kkt vào context và lưu vào cơ sở dữ liệu
-                    _context.CTDT_KKTs.Add(ctdt_kkt);
-                    _context.SaveChanges();
-
-                    // Thêm các HocPhan tương ứng vào ctdt_kkt
-                    foreach (var hocPhan_vm in ctdt_kkt_vm.HocPhans)
-                    {
-                        var hocPhan = new HocPhan
+                        // Tạo một đối tượng KKT từ maKKT và chuongTrinhDaoTao.Id
+                        CTDT_KKT ctdt_kkt = new CTDT_KKT
                         {
-                            MaHocPhan = hocPhan_vm.MaHocPhan,
-                            Ten = hocPhan_vm.Ten,
-                            MoTa = hocPhan_vm.MoTa,
-                            SoTinChi = (int)hocPhan_vm.SoTinChi,
-                            MaKhoa = hocPhan_vm.MaKhoa,
-                            // Gán các giá trị khác tương ứng
+                            MaKKT = maKKT,
+                            MaCTDT = chuongTrinhDaoTao.MaCTDT,
+                            MaCTDT_KKT = chuongTrinhDaoTao.MaCTDT + " - " + maKKT,
+                            TenCTDT_KKT = chuongTrinhDaoTao.Ten + " - " + tenKKT,
                         };
 
-                        // Thêm hocPhan vào context và lưu vào cơ sở dữ liệu
-                        _context.HocPhans.Add(hocPhan);
-                        _context.SaveChanges();
+                        // Lưu KKT vào cơ sở dữ liệu
+                        _context.CTDT_KKTs.Add(ctdt_kkt);
+                        await _context.SaveChangesAsync();
                     }
                 }
                 // Chuyển hướng đến action thêm CTDT_KKT_VM và truyền id của CTDT
                 return RedirectToAction("Details", new { id = chuongTrinhDaoTao.MaCTDT });
             }
 
-
+            ViewBag.Nganhs = new SelectList(_context.Nganhs, "MaNganh", "Ten");
+            ViewBag.KhoaHocs = new SelectList(_context.KhoaHocs, "MaKhoaHoc", "Ten");
+            ViewBag.Khoas = new SelectList(_context.Khoas, "MaKhoa", "Ten");
+            ViewBag.KKTs = new SelectList(_context.KhoiKienThucs, "MaKKT", "Ten");
+            ViewBag.HocPhans = new SelectList(_context.HocPhans, "MaHocPhan", "Ten");
             return View(ctdt_VM);
         }
 
         // GET: ChuongTrinhDaoTaos/Edit/5
+        [HttpGet]
+        [Route("ChuongTrinhDaoTaos/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.ChuongTrinhDaoTaos == null)
@@ -205,16 +192,18 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("ChuongTrinhDaoTaos/Edit/{id}")]
         public async Task<IActionResult> Edit(string id, [Bind("MaCTDT,Ten,MaKhoa,MaKhoaHoc,MaNganh,SoNamDaoTao")] CTDT_VM ctdt_VM)
         {
             var ctdt = await _context.ChuongTrinhDaoTaos.FindAsync(id);
-
+            var tenNganh = _context.Nganhs.FirstOrDefault(e => e.MaNganh == ctdt_VM.MaNganh)?.Ten;
+            var tenKhoaHoc = _context.KhoaHocs.FirstOrDefault(e => e.MaKhoaHoc == ctdt_VM.MaKhoaHoc)?.Ten;
             if (id != ctdt.MaCTDT)
             {
                 return NotFound();
             }
 
-            ctdt.Ten = ctdt_VM.TenNganh + " - " + ctdt_VM.TenKhoaHoc;
+            ctdt.Ten = tenNganh + " - " + tenKhoaHoc;
             ctdt.MaKhoa = ctdt_VM.MaKhoa;
             ctdt.MaKhoaHoc = ctdt_VM.MaKhoaHoc;
             ctdt.MaNganh = ctdt_VM.MaNganh;
@@ -247,6 +236,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: ChuongTrinhDaoTaos/Delete/5
+        [Route("ChuongTrinhDaoTaos/Delete/{id}")]
+
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.ChuongTrinhDaoTaos == null)
@@ -270,6 +261,8 @@ namespace QuanLyCTDT.Controllers
         // POST: ChuongTrinhDaoTaos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("ChuongTrinhDaoTaos/Delete/{id}")]
+
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.ChuongTrinhDaoTaos == null)

@@ -1,171 +1,55 @@
-﻿@model QL_CTDT.Data.Models.ViewModels.ChiTietCTDT_VM
+﻿@model QL_CTDT.Data.Models.ViewModels.Create_CTDT_VM
 
 <h2>Create CTDT</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaNganh, "Ngành")
-        @Html.DropDownListFor(model => model.MaNganh, ViewBag.Nganhs as SelectList, "-- Chọn ngành --", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.MaNganh)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaKhoaHoc, "Khóa học")
-        @Html.DropDownListFor(model => model.MaKhoaHoc, ViewBag.KhoaHocs as SelectList, "-- Chọn khóa học --", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.MaKhoaHoc)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MaKhoa, "Khoa")
-        @Html.DropDownListFor(model => model.MaKhoa, ViewBag.Khoas as SelectList, "-- Chọn khoa --", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.MaKhoa)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.SoNamDaoTao, "Số năm đào tạo")
-        @Html.TextBoxFor(model => model.SoNamDaoTao, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.SoNamDaoTao)
-    </div>
-
-    <!-- Các trường dữ liệu khác -->
-
-    <h4>CTDT_KKT</h4>
-
-    <div class="form-group" id="ctdt-kkt-container">
-        <!-- Giao diện cho CTDT_KKT -->
-        @for (int i = 0; i < Model.CTDT_KKT_VM.Count; i++)
-        {
-            <div class="ctdt-kkt-row">
-                <h5>CTDT_KKT @(i+1)</h5>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CTDT_KKT_VM[i].MaKKT, "KKT")
-                    @Html.DropDownListFor(model => model.CTDT_KKT_VM[i].MaKKT, ViewBag.KhoiKienThucs as SelectList, "-- Chọn KKT --", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.CTDT_KKT_VM[i].MaKKT)
-                </div>
-
-                <!-- Các trường dữ liệu khác cho CTDT_KKT -->
-
-                <h6>Học Phần</h6>
-
-                <div class="form-group" id="hocphan-container-@i">
-                    <!-- Giao diện cho HocPhan -->
-                    @for (int j = 0; j < Model.CTDT_KKT_VM[i].HocPhans.Count; j++)
-                    {
-                        <div class="hocphan-row">
-                            <h6>Học Phần @(j+1)</h6>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CTDT_KKT_VM[i].HocPhans[j].MaHocPhan, "Mã Học Phần")
-                                @Html.TextBoxFor(model => model.CTDT_KKT_VM[i].HocPhans[j].MaHocPhan, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CTDT_KKT_VM[i].HocPhans[j].MaHocPhan)
-                            </div>
-
-                            <!-- Các trường dữ liệu khác cho HocPhan -->
-
-                        </div>
-                    }
-                </div>
-
-                <button type="button" class="btn btn-primary" onclick="addHocPhan(@i)">Thêm Học Phần</button>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="Ten" class="control-label"></label>
+            <input asp-for="Ten" class="form-control" />
+            <span asp-validation-for="Ten" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="MaKhoa" class="control-label"></label>
+                <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.Khoas"></select>
+                <span asp-validation-for="MaKhoa" class="text-danger"></span>
             </div>
-        }
+            <div class="form-group">
+                <label asp-for="MaKhoaHoc" class="control-label"></label>
+                <select asp-for="MaKhoaHoc" class="form-control" asp-items="ViewBag.KhoaHocs"></select>
+                <span asp-validation-for="MaKhoaHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNganh" class="control-label"></label>
+                <select asp-for="MaNganh" class="form-control" asp-items="ViewBag.Nganhs"></select>
+                <span asp-validation-for="MaNganh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoNamDaoTao" class="control-label"></label>
+                <input asp-for="SoNamDaoTao" class="form-control" />
+                <span asp-validation-for="SoNamDaoTao" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="MaNganh" class="control-label"></label>
+                @foreach (var kkt in ViewBag.KKTs)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="MaKKT" value="@kkt.Value" class="makktCheckbox" />
+                            @kkt.Text
+                        </label>
+                    </div>
+                    
+                }
+                <span asp-validation-for="MaKhoa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
 
-    <button type="button" class="btn btn-primary" onclick="addCTDT_KKT()">Thêm CTDT_KKT</button>
-
-    <div class="form-group">
-        <input type="submit" value="Create" asp-action="Create" class="btn btn-primary" />
-    </div>
-}
-
-@section scripts {
-    <script>
-        var ctdtKKTIndex = 0;
-
-        function addCTDT_KKT() {
-            var container = document.getElementById("ctdt-kkt-container");
-
-            var row = document.createElement("div");
-            row.classList.add("ctdt-kkt-row");
-
-            var heading = document.createElement("h5");
-            heading.innerText = "CTDT_KKT " + (ctdtKKTIndex + 1);
-
-            var kktFormGroup = document.createElement("div");
-            kktFormGroup.classList.add("form-group");
-
-            var kktLabel = document.createElement("label");
-            kktLabel.innerText = "KKT";
-
-            var kktDropdown = document.createElement("select");
-            kktDropdown.classList.add("form-control");
-            kktDropdown.name = "CTDT_KKT_VM[" + ctdtKKTIndex + "].MaKKT";
-
-            // Thêm các tùy chọn cho dropdown KKT
-            var kktOptions = JSON.parse('@Html.Raw(Json.Serialize(ViewBag.KhoiKienThucs))');
-            for (var i = 0; i < kktOptions.length; i++) {
-                var option = document.createElement("option");
-                option.value = kktOptions[i].Value;
-                option.text = kktOptions[i].Text;
-                kktDropdown.appendChild(option);
-            }
-
-            kktFormGroup.appendChild(kktLabel);
-            kktFormGroup.appendChild(kktDropdown);
-
-            row.appendChild(heading);
-            row.appendChild(kktFormGroup);
-
-            // Thêm các trường dữ liệu khác cho CTDT_KKT
-
-            var hocPhanHeading = document.createElement("h6");
-            hocPhanHeading.innerText = "Học Phần";
-
-            var hocPhanContainer = document.createElement("div");
-            hocPhanContainer.classList.add("form-group");
-            hocPhanContainer.id = "hocphan-container-" + ctdtKKTIndex;
-
-            row.appendChild(hocPhanHeading);
-            row.appendChild(hocPhanContainer);
-
-            container.appendChild(row);
-
-            ctdtKKTIndex++;
-        }
-
-        function addHocPhan(ctdtKKTIndex) {
-            var container = document.getElementById("hocphan-container-" + ctdtKKTIndex);
-
-            var hocPhanRow = document.createElement("div");
-            hocPhanRow.classList.add("hocphan-row");
-
-            var hocPhanHeading = document.createElement("h6");
-            hocPhanHeading.innerText = "Học Phần";
-
-            var maHocPhanFormGroup = document.createElement("div");
-            maHocPhanFormGroup.classList.add("form-group");
-
-            var maHocPhanLabel = document.createElement("label");
-            maHocPhanLabel.innerText = "Mã Học Phần";
-
-            var maHocPhanTextBox = document.createElement("input");
-            maHocPhanTextBox.type = "text";
-            maHocPhanTextBox.classList.add("form-control");
-            maHocPhanTextBox.name = "CTDT_KKT_VM[" + ctdtKKTIndex + "].HocPhans[" + container.children.length + "].MaHocPhan";
-
-            maHocPhanFormGroup.appendChild(maHocPhanLabel);
-            maHocPhanFormGroup.appendChild(maHocPhanTextBox);
-
-            hocPhanRow.appendChild(hocPhanHeading);
-            hocPhanRow.appendChild(maHocPhanFormGroup);
-
-            // Thêm các trường dữ liệu khác cho HocPhan
-
-            container.appendChild(hocPhanRow);
-        }
-    </script>
-}

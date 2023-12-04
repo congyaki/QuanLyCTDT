@@ -13,44 +13,34 @@ namespace QuanLyCTDT.Controllers
 {
     public class HocPhansController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public HocPhansController()
+        public HocPhansController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("HocPhans/Index")]
         public IActionResult Index()
         {
-            List<HocPhan> hocPhans = new List<HocPhan>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/HocPhan/GetHocPhans").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                hocPhans = JsonConvert.DeserializeObject<List<HocPhan>>(data);
-            }
-            return View(hocPhans);
+            return View();
         }
 
         // GET: HocPhansController/Details/5
         [HttpGet("{id}")]
+        [Route("HocPhans/Details/{id}")]
+
         public IActionResult Details()
         {
-            HocPhan hocPhan = new HocPhan();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/HocPhan/GetHocPhan").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                hocPhan = JsonConvert.DeserializeObject<HocPhan>(data);
-            }
-            return View(hocPhan);
+            
+            return View();
         }
 
         // GET: HocPhans/Create
-        /*public IActionResult Create()
+        [Route("HocPhans/Create")]
+
+        public IActionResult Create()
         {
             ViewData["MaKhoa"] = new SelectList(_context.Khoas, "MaKhoa", "MaKhoa");
             return View();
@@ -61,6 +51,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("HocPhans/Create")]
+
         public async Task<IActionResult> Create([Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
         {
             if (ModelState.IsValid)
@@ -74,6 +66,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: HocPhans/Edit/5
+        [Route("HocPhans/Edit/{id}")]
+
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.HocPhans == null)
@@ -95,6 +89,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("HocPhans/Edit/{id}")]
+
         public async Task<IActionResult> Edit(string id, [Bind("MaHocPhan,Ten,MoTa,SoTinChi,MaKhoa")] HocPhan hocPhan)
         {
             if (id != hocPhan.MaHocPhan)
@@ -127,6 +123,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: HocPhans/Delete/5
+        [Route("HocPhans/Delete/{id}")]
+
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.HocPhans == null)
@@ -148,6 +146,8 @@ namespace QuanLyCTDT.Controllers
         // POST: HocPhans/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("HocPhans/Delete/{id}")]
+
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.HocPhans == null)
@@ -159,14 +159,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.HocPhans.Remove(hocPhan);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool HocPhanExists(string id)
         {
-          return (_context.HocPhans?.Any(e => e.MaHocPhan == id)).GetValueOrDefault();
-        }*/
+            return (_context.HocPhans?.Any(e => e.MaHocPhan == id)).GetValueOrDefault();
+        }
     }
 }

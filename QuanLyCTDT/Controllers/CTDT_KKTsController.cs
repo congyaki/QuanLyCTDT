@@ -23,7 +23,7 @@ namespace QuanLyCTDT.Controllers
 
         // GET: CTDT_KKTsController
         [HttpGet]
-        [Route("Index")]
+        [Route("CTDT_KKTS/Index")]
         public async Task<IActionResult> Index()
         {
             List<CTDT_KKT_VM> danhSachCTDT_KKT = await _context.CTDT_KKTs
@@ -39,7 +39,7 @@ namespace QuanLyCTDT.Controllers
 
         // GET: DanhMucCTDT_KKTs/Details/5
         [HttpGet]
-        [Route("Details/{id}")]
+        [Route("CTDT_KKTS/Details/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             CTDT_KKT_VM ck = await _context.CTDT_KKTs
@@ -55,10 +55,12 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: CTDT_KKTs/Create
-        /*public IActionResult Create()
+        [Route("CTDT_KKTS/Create")]
+
+        public IActionResult Create()
         {
-            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "MaCTDT");
-            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "MaKKT");
+            ViewData["MaCTDT"] = new SelectList(_context.ChuongTrinhDaoTaos, "MaCTDT", "Ten");
+            ViewData["MaKKT"] = new SelectList(_context.KhoiKienThucs, "MaKKT", "Ten");
             return View();
         }
 
@@ -67,6 +69,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("CTDT_KKTS/Create/{id}")]
+
         public async Task<IActionResult> Create([Bind("MaCTDT_KKT,MaCTDT,MaKKT")] CTDT_KKT cTDT_KKT)
         {
             if (ModelState.IsValid)
@@ -81,6 +85,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: CTDT_KKTs/Edit/5
+        [Route("CTDT_KKTS/Edit/{id}")]
+
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.CTDT_KKTs == null)
@@ -103,6 +109,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("CTDT_KKTS/Edit/{id}")]
+
         public async Task<IActionResult> Edit(string id, [Bind("MaCTDT_KKT,MaCTDT,MaKKT")] CTDT_KKT cTDT_KKT)
         {
             if (id != cTDT_KKT.MaCTDT_KKT)
@@ -136,6 +144,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: CTDT_KKTs/Delete/5
+        [Route("CTDT_KKTS/Delete/{id}")]
+
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.CTDT_KKTs == null)
@@ -158,6 +168,8 @@ namespace QuanLyCTDT.Controllers
         // POST: CTDT_KKTs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("CTDT_KKTS/Delete/{id}")]
+
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.CTDT_KKTs == null)
@@ -169,14 +181,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.CTDT_KKTs.Remove(cTDT_KKT);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CTDT_KKTExists(string id)
         {
-          return (_context.CTDT_KKTs?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
-        }*/
+            return (_context.CTDT_KKTs?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
+        }
     }
 }

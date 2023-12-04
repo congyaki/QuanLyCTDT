@@ -10,7 +10,8 @@
     {
         <div class="card mb-3">
             <div class="card-header bg-secondary text-light">
-                <h2>@ctdt_kkt.TenKKT</h2>
+                <h2 class="float-left">@ctdt_kkt.TenKKT</h2>
+                <a asp-route-id="@ctdt_kkt.MaCTDT_KKT" asp-action="Create" asp-controller="GanHocPhans" class="btn btn-primary float-right font-weight-bold">Gán Học Phần</a>
             </div>
             <div class="card-body">
                 <p class="text-muted">Tổng số học phần: @ctdt_kkt.TongSoHocPhan</p>

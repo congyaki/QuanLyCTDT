@@ -13,47 +13,39 @@ namespace QuanLyCTDT.Controllers
 {
     public class GanHocPhansController : Controller
     {
-        Uri baseAddress = new Uri("https://localhost:7262/api");
-        private readonly HttpClient _httpClient;
+        private readonly TrainingProgramDbContext _context;
 
-        public GanHocPhansController()
+        public GanHocPhansController(TrainingProgramDbContext context)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = baseAddress;
+            _context = context;
         }
         // GET: KhoaHocsController
         [HttpGet]
+        [Route("GanHocPhans/Index")]
+
         public IActionResult Index()
         {
-            List<GanHocPhan> ganHocPhans = new List<GanHocPhan>();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/GanHocPhan/GetGanHocPhans").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                ganHocPhans = JsonConvert.DeserializeObject<List<GanHocPhan>>(data);
-            }
-            return View(ganHocPhans);
+            
+            return View();
         }
 
         // GET: DanhMucCTDTsController/Details/5
         [HttpGet("{id}")]
+        [Route("GanHocPhans/Details/{id}")]
+
         public IActionResult Details()
         {
-            GanHocPhan danhMucCTDT = new GanHocPhan();
-            HttpResponseMessage response = _httpClient.GetAsync(baseAddress + "/GanHocPhan/GetGanHocPhans").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                danhMucCTDT = JsonConvert.DeserializeObject<GanHocPhan>(data);
-            }
-            return View(danhMucCTDT);
+            
+            return View();
         }
 
         // GET: GanHocPhans/Create
-        /*public IActionResult Create()
+        [HttpGet]
+        [Route("GanHocPhans/Create/{id}")]
+        public IActionResult Create(string id)
         {
-            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT");
-            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan");
+            ViewData["CTDT_KKT"] = _context.CTDT_KKTs.FirstOrDefault(e => e.MaCTDT_KKT == id);
+            ViewData["HocPhans"] = new SelectList(_context.HocPhans, "MaHocPhan", "Ten");
             return View();
         }
 
@@ -62,20 +54,34 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaCTDT_KKT,MaHocPhan")] GanHocPhan ganHocPhan)
+        [Route("GanHocPhans/Create/{id}")]
+        public async Task<IActionResult> Create(string maCTDT_KKT, string[] maHP)
         {
-            if (ModelState.IsValid)
+
+            if (maCTDT_KKT != null && maHP != null)
             {
-                _context.Add(ganHocPhan);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                foreach (var hp in maHP)
+                {
+                    GanHocPhan ganHP = new GanHocPhan
+                    {
+                        MaCTDT_KKT = maCTDT_KKT,
+                        MaHocPhan = hp
+                    };
+
+                    // Lưu KKT vào cơ sở dữ liệu
+                    _context.GanHocPhans.Add(ganHP);
+                    await _context.SaveChangesAsync();
+                }
+                var maCTDT = _context.CTDT_KKTs.FirstOrDefault(e => e.MaCTDT_KKT == maCTDT_KKT).MaCTDT;
+                return RedirectToAction("Details", "ChuongTrinhDaoTaos", new { id = maCTDT });
             }
-            ViewData["MaCTDT_KKT"] = new SelectList(_context.CTDT_KKTs, "MaCTDT_KKT", "MaCTDT_KKT", ganHocPhan.MaCTDT_KKT);
-            ViewData["MaHocPhan"] = new SelectList(_context.HocPhans, "MaHocPhan", "MaHocPhan", ganHocPhan.MaHocPhan);
-            return View(ganHocPhan);
+            ViewData["HocPhans"] = new SelectList(_context.HocPhans, "MaHocPhan", "Ten");
+
+            return View();
         }
 
         // GET: GanHocPhans/Edit/5
+        [Route("GanHocPhans/Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.GanHocPhans == null)
@@ -98,6 +104,8 @@ namespace QuanLyCTDT.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("GanHocPhans/Edit/{id}")]
+
         public async Task<IActionResult> Edit(string id, [Bind("MaCTDT_KKT,MaHocPhan")] GanHocPhan ganHocPhan)
         {
             if (id != ganHocPhan.MaCTDT_KKT)
@@ -131,6 +139,8 @@ namespace QuanLyCTDT.Controllers
         }
 
         // GET: GanHocPhans/Delete/5
+        [Route("GanHocPhans/Delete/{id}")]
+
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.GanHocPhans == null)
@@ -151,8 +161,11 @@ namespace QuanLyCTDT.Controllers
         }
 
         // POST: GanHocPhans/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("GanHocPhans/Delete/{id}")]
+
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.GanHocPhans == null)
@@ -164,14 +177,14 @@ namespace QuanLyCTDT.Controllers
             {
                 _context.GanHocPhans.Remove(ganHocPhan);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool GanHocPhanExists(string id)
         {
-          return (_context.GanHocPhans?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
-        }*/
+            return (_context.GanHocPhans?.Any(e => e.MaCTDT_KKT == id)).GetValueOrDefault();
+        }
     }
 }
