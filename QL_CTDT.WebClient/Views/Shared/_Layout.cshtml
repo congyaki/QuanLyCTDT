@@ -43,12 +43,12 @@
         <ul>
             <li><a href="#">TRANG CHỦ</a></li>
             <li>
-                <a href="/CTDT.html">CHƯƠNG TRÌNH ĐÀO TẠO</a>
+                <a asp-action="Index" asp-controller="Nganhs">CHƯƠNG TRÌNH ĐÀO TẠO</a>
                 <ul>
-                    <li><a href="#">khoa cntt</a></li>
-                    <li><a href="#">khoa cntt</a></li>
-                    <li><a href="#">khoa cntt</a></li>
-                    <li><a href="#">khoa cntt</a></li>
+                    <li><a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="CNTT - K1" class="btn btn-primary">Công Nghệ Thông Tin</a></li>
+                    <li><a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="CTND - K1" class="btn btn-primary">Chính Trị Nhân Dân</a></li>
+                    <li><a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="KT1 - K1" class="btn btn-primary">Kế Toán</a></li>
+                    <li><a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="KTOT - K1" class="btn btn-primary">Kỹ Thuật Ô Tô</a></li>
                 </ul>
             </li>
             <li><a href="#">SINH VIÊN</a></li>

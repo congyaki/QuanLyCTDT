@@ -45,6 +45,14 @@
       "PackagePath": "staticwebassets\\Font\\yugothib.ttf"
     },
     {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\sb-admin-2.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.css"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\sb-admin-2.min.css",
+      "PackagePath": "staticwebassets\\css\\sb-admin-2.min.css"
+    },
+    {
       "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

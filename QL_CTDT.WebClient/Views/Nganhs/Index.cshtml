@@ -3,20 +3,142 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
+    .content {
+        /*font-family: 'Helvetica Neue', Arial, sans-serif;*/
+        display: block !important;
+        width:100%;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #343a40; /* Màu chữ đen */
+    }
+
+    .display-7 {
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: #343a40; /* Màu chữ đen */
+    }
+
+    .container {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .py-5 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+        justify-content: center; /* Center the row horizontally */
+    }
+
+    .row-cols-4 > * {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+
+    .g-3 {
+        gap: 9rem; /* Khoảng cách giữa các cột */
+    }
+    
+
+    .col {
+        flex: 0 0 20%;
+        max-width: 20%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 20px; /* Increase the margin-bottom to add space between columns */
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem; /* Khoảng cách dưới của mỗi cột */
+    }
+
+    .card {
+        height: 100%; /* Thiết lập chiều cao của thẻ card */
+        display: flex;
+        flex-direction: column;
+        word-wrap: break-word;
+        width: 400px;
+        background-color: #fff; /* Màu nền thẻ card */
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.5rem; /* Bo tròn góc thẻ card */
+        transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng đổ khi rê chuột lên */
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 1.5rem; /* Khoảng cách bên trong thẻ card */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+        color: #007bff; /* Màu chữ xanh dương của Bootstrap */
+    }
+
+    .card-text {
+        color: #6c757d; /* Màu chữ xám của Bootstrap */
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        padding: 0.5rem 1rem; /* Kích thước padding của nút */
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+</style>
 
 <div class="text-center">
     <h1 class="display-4 font-weight-bold text-dark">Welcome to</h1>
     <h1 class="display-7 font-weight-bold text-dark">Hệ Thống Quản Lý Chương Trình Đào Tạo</h1>
 </div>
 <main class="container py-5 main">
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        @foreach (var item in Model) {
+    <div class="row row-cols-4 g-3">
+        @foreach (var item in Model)
+        {
             <div class="col mb-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <h2 class="card-title font-weight-bold">@item.Ten</h2>
                         <p class="card-text">@item.MoTa</p>
-                        <a asp-action="Index" asp-controller="Khoa" class="btn btn-primary">Xem CTĐT Ngành @item.Ten</a>
+                        <a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="@item.MaCTDT" class="btn btn-primary">Xem CTĐT</a>
                     </div>
                 </div>
             </div>

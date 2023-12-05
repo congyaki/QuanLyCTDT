@@ -1,48 +1,116 @@
-﻿@model QL_CTDT.Data.Models.Entities.ChuongTrinhDaoTao
+﻿@model QL_CTDT.Data.Models.ViewModels.ChiTietCTDT_VM
 
-@{
-    ViewData["Title"] = "Details";
-}
+<!-- Thêm container để giữ nội dung trung tâm và thêm margin -->
 
-<h1>Details</h1>
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-<div>
-    <h4>ChuongTrinhDaoTao</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ten)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ten)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoNamDaoTao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoNamDaoTao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Khoa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Khoa.MaKhoa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KhoaHoc)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.KhoaHoc.MaKhoaHoc)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nganh)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nganh.MaNganh)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.MaCTDT">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    .text-info {
+        color: #17a2b8;
+    }
+
+    .card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #6c757d;
+        color: #fff;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .list-group{
+        list-style-type: none;
+    }
+    .list-group-item {
+        padding: 10px;
+        border: none;
+    }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+        }
+
+    .btn-secondary {
+        background-color: burlywood;
+        color: #fff;
+        margin-top: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.5s;
+        text-align: center;
+    }
+
+        .btn-secondary:hover {
+            background-color: coral;
+            transition: 0.5s;
+        }
+</style>
+
+<div class="container">
+    <h1 class="text-primary">CTĐT: @Model.TenCTDT</h1>
+    <p>Khóa học: <span class="text-info">@Model.TenKhoaHoc</span></p>
+    <p>Ngành: <span class="text-info">@Model.TenNganh</span></p>
+
+    @foreach (var ctdt_kkt in Model.CTDT_KKT_VM)
+    {
+        <div class="card mb-3">
+            <div class="card-header bg-secondary text-light">
+                <h2 class="float-left">@ctdt_kkt.TenKKT</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Tổng số học phần: @ctdt_kkt.TongSoHocPhan</p>
+
+                <ul class="list-group">
+                    @foreach (var hocPhan in ctdt_kkt.HocPhans)
+                    {
+                        <li class="list-group-item">
+                            <strong>@hocPhan.MaHocPhan - @hocPhan.Ten</strong>
+                            <p class="mb-0">Mô tả: @hocPhan.MoTa</p>
+                            <p class="mb-0">Số tín chỉ: @hocPhan.SoTinChi</p>
+                            <p class="mb-0">Mã khoa: @hocPhan.MaKhoa</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a class="btn btn-secondary" asp-controller="Nganhs" asp-action="Index">Quay lại</a>
+    </div>
 </div>

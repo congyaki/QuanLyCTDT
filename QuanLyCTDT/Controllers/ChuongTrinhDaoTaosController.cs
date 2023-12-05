@@ -62,6 +62,7 @@ namespace QuanLyCTDT.Controllers
             var chiTietCTDT = _context.KhoaHocs
             .SelectMany(kh => kh.ChuongTrinhDaoTaos.Where(ctdt => ctdt.MaCTDT == id).Select(ctdt => new ChiTietCTDT_VM
             {
+                MaCTDT = ctdt.MaCTDT,
                 TenKhoaHoc = kh.Ten,
                 TenNganh = ctdt.Nganh.Ten,
                 TenCTDT = ctdt.Ten,

@@ -36,7 +36,8 @@ namespace QL_CTDT.WebClient.Controllers
                     Ten = nganh.Ten,
                     MoTa = nganh.MoTa,
                     MaKhoa = nganh.MaKhoa,
-                    TenKhoa = nganh.Khoa.Ten
+                    TenKhoa = nganh.Khoa.Ten,
+                    MaCTDT = _context.ChuongTrinhDaoTaos.FirstOrDefault(e => e.MaNganh == nganh.MaNganh).MaCTDT,
                 })
                 .ToListAsync();
             return View(danhSachNganhVM);

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0COROJqRb9sYc+/cMdN9pQ5TP7/wd22oJ8eWE8hK/6w=",
+  "Hash": "hmg+NROF2zDLEzaGxqCV4wHgUyultqYj9HhRZcBfXLY=",
   "Source": "QL_CTDT.WebClient",
   "BasePath": "_content/QL_CTDT.WebClient",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\QL_CTDT.WebClient.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\sb-admin-2.css",
+      "SourceId": "QL_CTDT.WebClient",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\",
+      "BasePath": "_content/QL_CTDT.WebClient",
+      "RelativePath": "css/sb-admin-2.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\sb-admin-2.css"
+    },
+    {
+      "Identity": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\sb-admin-2.min.css",
+      "SourceId": "QL_CTDT.WebClient",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\",
+      "BasePath": "_content/QL_CTDT.WebClient",
+      "RelativePath": "css/sb-admin-2.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\sb-admin-2.min.css"
     },
     {
       "Identity": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\site.css",

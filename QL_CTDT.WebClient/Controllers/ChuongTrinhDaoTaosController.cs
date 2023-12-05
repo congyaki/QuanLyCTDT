@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.WebClient.Controllers
 {
@@ -29,22 +30,42 @@ namespace QL_CTDT.WebClient.Controllers
         // GET: ChuongTrinhDaoTaos/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.ChuongTrinhDaoTaos == null)
+            if (_context.ChuongTrinhDaoTaos == null)
             {
                 return NotFound();
             }
+            var chiTietCTDT = _context.KhoaHocs
+            .SelectMany(kh => kh.ChuongTrinhDaoTaos.Where(ctdt => ctdt.MaCTDT == id).Select(ctdt => new ChiTietCTDT_VM
+            {
+                TenKhoaHoc = kh.Ten,
+                TenNganh = ctdt.Nganh.Ten,
+                TenCTDT = ctdt.Ten,
+                CTDT_KKT_VM = ctdt.CTDT_KKTs
+                    .Select(ctdt_kkt => new CTDT_KKT_VM
+                    {
+                        MaCTDT_KKT = ctdt_kkt.MaCTDT_KKT,
+                        TenKKT = ctdt_kkt.KhoiKienThuc.Ten,
+                        TongSoHocPhan = ctdt_kkt.GanHocPhans.Count,
+                        HocPhans = ctdt_kkt.GanHocPhans
+                            .Select(ganHP => new HocPhan_VM
+                            {
+                                MaHocPhan = ganHP.HocPhan.MaHocPhan,
+                                Ten = ganHP.HocPhan.Ten,
+                                MoTa = ganHP.HocPhan.MoTa,
+                                SoTinChi = ganHP.HocPhan.SoTinChi,
+                                MaKhoa = ganHP.HocPhan.MaKhoa
+                            })
+                            .ToList()
+                    })
+                    .ToList()
+            }))
+            .FirstOrDefault();
 
-            var chuongTrinhDaoTao = await _context.ChuongTrinhDaoTaos
-                .Include(c => c.Khoa)
-                .Include(c => c.KhoaHoc)
-                .Include(c => c.Nganh)
-                .FirstOrDefaultAsync(m => m.MaCTDT == id);
-            if (chuongTrinhDaoTao == null)
+            if (chiTietCTDT == null)
             {
                 return NotFound();
             }
-
-            return View(chuongTrinhDaoTao);
+            return View(chiTietCTDT);
         }
 
         // GET: ChuongTrinhDaoTaos/Create
