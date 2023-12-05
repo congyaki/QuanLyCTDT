@@ -24,4 +24,8 @@
     <ProjectReference Include="..\QL_CTDT.Data\QL_CTDT.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Font\Yu Gothic\Yu Gothic Light\" />
+  </ItemGroup>
+
 </Project>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QL_CTDT.Data.Models.EF;
 using QL_CTDT.Data.Models.Entities;
+using QL_CTDT.Data.Models.ViewModels;
 
 namespace QL_CTDT.WebClient.Controllers
 {
@@ -20,10 +21,25 @@ namespace QL_CTDT.WebClient.Controllers
         }
 
         // GET: Nganhs
+        [HttpGet]
+        [Route("Nganhs/Index")]
         public async Task<IActionResult> Index()
         {
-            var trainingProgramDbContext = _context.Nganhs.Include(n => n.Khoa);
-            return View(await trainingProgramDbContext.ToListAsync());
+            if (_context.Nganhs == null)
+            {
+                return NotFound();
+            }
+            var danhSachNganhVM = await _context.Nganhs
+                .Select(nganh => new Nganh_VM
+                {
+                    MaNganh = nganh.MaNganh,
+                    Ten = nganh.Ten,
+                    MoTa = nganh.MoTa,
+                    MaKhoa = nganh.MaKhoa,
+                    TenKhoa = nganh.Khoa.Ten
+                })
+                .ToListAsync();
+            return View(danhSachNganhVM);
         }
 
         // GET: Nganhs/Details/5

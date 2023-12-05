@@ -1,53 +1,79 @@
 ﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.HocPhan_VM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Lý Học Phần";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<!-- Page Heading -->
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ten)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoTinChi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhoa)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoTinChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenKhoa)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHocPhan">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHocPhan">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHocPhan">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!-- DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                            <button type="button" onclick="window.location.href='/Manufacturer/Index'" class="btn btn-dark">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center align-middle">
+                            ID
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên
+                        </th>
+                        <th class="text-center align-middle">
+                            Mô Tả
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hocphan in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => hocphan.MaHocPhan)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Details" asp-route-id="@hocphan.MaHocPhan">
+                                    @Html.DisplayFor(modelItem => hocphan.Ten)
+                                </a>
+                            </td>
+                            <td class="align-middle text-center">
+                                @Html.DisplayFor(modelItem => hocphan.MoTa)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Edit" asp-route-id="@hocphan.MaHocPhan" class="btn btn-warning mr-2">
+                                    <span class="text">Sửa</span>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@hocphan.MaHocPhan" class="btn btn-danger">
+                                    <span class="text">Xóa</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

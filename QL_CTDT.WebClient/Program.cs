@@ -2,18 +2,18 @@ using Microsoft.EntityFrameworkCore;
 using QL_CTDT.Data.Models.EF;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
 var connectionString = builder.Configuration.GetConnectionString("TrainingProgramDB");
 /*builder.Services.AddDbContext<TrainingProgramDbContext>(options => options.UseSqlServer(connectionString));*/
 builder.Services.AddDbContext<TrainingProgramDbContext>(option =>
 {
     option.UseSqlServer(connectionString);
 });
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

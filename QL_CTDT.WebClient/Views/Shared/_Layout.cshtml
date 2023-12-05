@@ -1,49 +1,71 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QL_CTDT.WebClient</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/QL_CTDT.WebClient.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/png" href="~/img/Logo_CellPhoneX.png">
+
+
+    <link rel="stylesheet" href="~/css/webClient.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QL_CTDT.WebClient</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="top_bar">
+        <div class="medium-container">
+            <div class="row">
+                <div class="top_inner">
+                    <div class="common_css">
+                        <div class="info-left">
+                            <div class="icon">
+                                <img src="~/image/gmail (1).png">
+                            </div>
+                            <div>
+                                <a href="#" style="color: aliceblue;">Nhom2@gmail.com</a>
+                            </div>
+                            <div class="icon" style="margin-left: 40px;">
+                                <img src="~/image/phone-call.png">
+                            </div>
+                            <div class="text">
+                                <a href="#" style="color: aliceblue;">0886666666</a>
+                            </div>
+                        </div>
+                        <div class="info-right">
+                            <a href="#"><img src="~/image/facebook.png"></a>
+                            <a href="#"></a><img src="~/image/vietnam.png" style="margin-left: 15px;"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - QL_CTDT.WebClient - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
+    </div>
+    <header>
+        <a href="#" class="logo">Logo</a>
+        <ul>
+            <li><a href="#">TRANG CHỦ</a></li>
+            <li>
+                <a href="/CTDT.html">CHƯƠNG TRÌNH ĐÀO TẠO</a>
+                <ul>
+                    <li><a href="#">khoa cntt</a></li>
+                    <li><a href="#">khoa cntt</a></li>
+                    <li><a href="#">khoa cntt</a></li>
+                    <li><a href="#">khoa cntt</a></li>
+                </ul>
+            </li>
+            <li><a href="#">SINH VIÊN</a></li>
+            <li><a href="#">ĐĂNG NHẬP</a></li>
+        </ul>
+    </header>
+    <div class="content">
+        @RenderBody()
+    </div>
+    <footer>
+        
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        })
+    </script>
 </body>
 </html>

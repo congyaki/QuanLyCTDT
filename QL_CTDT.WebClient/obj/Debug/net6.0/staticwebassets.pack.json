@@ -5,12 +5,136 @@
       "PackagePath": "staticwebassets\\QL_CTDT.WebClient.bundle.scp.css"
     },
     {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\HindJalandhar-Bold.ttf",
+      "PackagePath": "staticwebassets\\Font\\HindJalandhar-Bold.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\HindJalandhar-Light.ttf",
+      "PackagePath": "staticwebassets\\Font\\HindJalandhar-Light.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\HindJalandhar-Medium.ttf",
+      "PackagePath": "staticwebassets\\Font\\HindJalandhar-Medium.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\HindJalandhar-Regular.ttf",
+      "PackagePath": "staticwebassets\\Font\\HindJalandhar-Regular.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\HindJalandhar-SemiBold.ttf",
+      "PackagePath": "staticwebassets\\Font\\HindJalandhar-SemiBold.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\Yu Gothic Light.ttf",
+      "PackagePath": "staticwebassets\\Font\\Yu Gothic Light.ttf"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\Yu Gothic\\readme.html",
+      "PackagePath": "staticwebassets\\Font\\Yu Gothic\\readme.html"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\sharefonts.net.txt",
+      "PackagePath": "staticwebassets\\Font\\sharefonts.net.txt"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\yugothib.png",
+      "PackagePath": "staticwebassets\\Font\\yugothib.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\Font\\yugothib.ttf",
+      "PackagePath": "staticwebassets\\Font\\yugothib.ttf"
+    },
+    {
       "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\css\\webClient.css",
+      "PackagePath": "staticwebassets\\css\\webClient.css"
+    },
+    {
       "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\6ce18ae39c200283f07aaa0d7856a413.png",
+      "PackagePath": "staticwebassets\\image\\6ce18ae39c200283f07aaa0d7856a413.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\Logo_footer.png",
+      "PackagePath": "staticwebassets\\image\\Logo_footer.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\email.png",
+      "PackagePath": "staticwebassets\\image\\email.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\facebook.png",
+      "PackagePath": "staticwebassets\\image\\facebook.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\gmail (1).png",
+      "PackagePath": "staticwebassets\\image\\gmail (1).png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\home-4-24.png",
+      "PackagePath": "staticwebassets\\image\\home-4-24.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\home.png",
+      "PackagePath": "staticwebassets\\image\\home.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\human.png",
+      "PackagePath": "staticwebassets\\image\\human.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\imgbutton.png",
+      "PackagePath": "staticwebassets\\image\\imgbutton.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\logo.png",
+      "PackagePath": "staticwebassets\\image\\logo.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\logoTruongDHThuDo.png",
+      "PackagePath": "staticwebassets\\image\\logoTruongDHThuDo.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\mail.png",
+      "PackagePath": "staticwebassets\\image\\mail.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\manhdinh.jpg",
+      "PackagePath": "staticwebassets\\image\\manhdinh.jpg"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\mes.png",
+      "PackagePath": "staticwebassets\\image\\mes.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\money.png",
+      "PackagePath": "staticwebassets\\image\\money.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\note.png",
+      "PackagePath": "staticwebassets\\image\\note.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\noti.png",
+      "PackagePath": "staticwebassets\\image\\noti.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\one.png",
+      "PackagePath": "staticwebassets\\image\\one.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\phone-call.png",
+      "PackagePath": "staticwebassets\\image\\phone-call.png"
+    },
+    {
+      "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\image\\vietnam.png",
+      "PackagePath": "staticwebassets\\image\\vietnam.png"
     },
     {
       "Id": "D:\\WorkSpace\\c_sharp\\QuanLyCTDT\\QL_CTDT.WebClient\\wwwroot\\js\\site.js",

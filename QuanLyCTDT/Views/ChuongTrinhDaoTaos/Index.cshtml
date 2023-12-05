@@ -1,59 +1,97 @@
 ﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.CTDT_VM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản Lý CTDT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<!-- Page Heading -->
+<h1 class="mb-4 font-weight-bold text-center">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TenCTDT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SoNamDaoTao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhoa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenKhoaHoc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TenNganh)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenCTDT)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SoNamDaoTao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenKhoa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenKhoaHoc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TenNganh)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.MaCTDT">Edit</a> |
-                        <a asp-action="Details" asp-controller="ChuongTrinhDaoTaos" asp-route-id="@item.MaCTDT">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.MaCTDT">Delete</a>
-                    </td>
-                </tr>
-        }
-    </tbody>
-</table>
+<!-- DataTales -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <a class="btn btn-success" asp-action="Create">Thêm Mới</a>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+                            <button type="button" onclick="window.location.href='/Manufacturer/Index'" class="btn btn-dark">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center align-middle">
+                            ID
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên CTDT
+                        </th>
+                        <th class="text-center align-middle">
+                            Số Năm Đào Tạo
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên Khoa
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên Khóa Học
+                        </th>
+                        <th class="text-center align-middle">
+                            Tên Ngành
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ctdt in Model)
+                    {
+                        <tr>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => ctdt.MaCTDT)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Details" asp-route-id="@ctdt.MaCTDT">
+                                    @Html.DisplayFor(modelItem => ctdt.TenCTDT)
+                                </a>
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => ctdt.SoNamDaoTao)
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => ctdt.TenKhoa)
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => ctdt.TenKhoaHoc)
+                            </td>
+                            <td class="text-center align-middle">
+                                @Html.DisplayFor(modelItem => ctdt.TenNganh)
+                            </td>
+                            <td class="text-center align-middle">
+                                <a asp-action="Edit" asp-route-id="@ctdt.MaCTDT" class="btn btn-warning mr-2">
+                                    <span class="text">Sửa</span>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@ctdt.MaCTDT" class="btn btn-danger">
+                                    <span class="text">Xóa</span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

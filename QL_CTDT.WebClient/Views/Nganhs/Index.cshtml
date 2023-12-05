@@ -1,47 +1,25 @@
-﻿@model IEnumerable<QL_CTDT.Data.Models.Entities.Nganh>
+﻿@model IEnumerable<QL_CTDT.Data.Models.ViewModels.Nganh_VM>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ten)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MoTa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Khoa)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ten)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Khoa.MaKhoa)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaNganh">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaNganh">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaNganh">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="text-center">
+    <h1 class="display-4 font-weight-bold text-dark">Welcome to</h1>
+    <h1 class="display-7 font-weight-bold text-dark">Hệ Thống Quản Lý Chương Trình Đào Tạo</h1>
+</div>
+<main class="container py-5 main">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        @foreach (var item in Model) {
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title font-weight-bold">@item.Ten</h2>
+                        <p class="card-text">@item.MoTa</p>
+                        <a asp-action="Index" asp-controller="Khoa" class="btn btn-primary">Xem CTĐT Ngành @item.Ten</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</main>
